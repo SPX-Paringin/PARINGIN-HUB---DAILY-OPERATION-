@@ -1701,18 +1701,17 @@
             document.getElementById('sumOther_StdBulky').innerText = sumOther.stdBulky;
             document.getElementById('sumOther_EcoBulky').innerText = sumOther.ecoBulky;
 
-            // HITUNG STATISTIK UTAMA KARD
-            const grandTotalNonBulky = sumA.stdNon + sumA.ecoNon + sumBC.stdNon + sumBC.ecoNon + sumOther.stdNon + sumOther.ecoNon;
-            const grandTotalBulky = sumA.stdBulky + sumA.ecoBulky + sumBC.stdBulky + sumBC.ecoBulky + sumOther.stdBulky + sumOther.ecoBulky;
-            const grandTotalProjection = grandTotalNonBulky + grandTotalBulky;
+            const grandNonBulky = sumA.stdNon + sumA.ecoNon + sumBC.stdNon + sumBC.ecoNon + sumOther.stdNon + sumOther.ecoNon;
+            const grandBulky = sumA.stdBulky + sumA.ecoBulky + sumBC.stdBulky + sumBC.ecoBulky + sumOther.stdBulky + sumOther.ecoBulky;
+            const grandTotal = grandNonBulky + grandBulky;
 
-            document.getElementById('statNonBulky').innerText = grandTotalNonBulky.toLocaleString('id-ID');
-            document.getElementById('statBulky').innerText = grandTotalBulky.toLocaleString('id-ID');
-            document.getElementById('statProjection').innerText = grandTotalProjection.toLocaleString('id-ID');
+            document.getElementById('statNonBulky').innerText = grandNonBulky.toLocaleString('id-ID');
+            document.getElementById('statBulky').innerText = grandBulky.toLocaleString('id-ID');
+            document.getElementById('statProjection').innerText = grandTotal.toLocaleString('id-ID');
             document.getElementById('statHV').innerText = countHVGlobal.toLocaleString('id-ID');
         }
 
-        // INITIALIZATION WHEN PAGE LOADS
+        // INITIALIZATION
         window.addEventListener('DOMContentLoaded', () => {
             updateWitaHeaderDate();
             renderOffDayTable();
