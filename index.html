@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DAILY OPERATION PARINGIN HUB - SPX Express</title>
-<link rel="icon" type="image/png" href="favicon-paringin.png">
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -1057,7 +1056,8 @@
 
         const statusOptions = ['Active', 'Off Day', 'Cuti', 'Izin'];
 
-        let dedicatedCouriers = [
+        // --- SINKRONISASI DATABROWSER DENGAN LOCALSTORAGE ---
+        const defaultDedicatedCouriers = [
             { id: '322079', name: 'HADRI', zone1: 'A1', zone2: '-', status: 'Active' },
             { id: '581155', name: 'ABDILLAH', zone1: 'OFF DAY', zone2: '-', status: 'Off Day' },
             { id: '475417', name: 'M. YUNUS', zone1: 'C1', zone2: 'C3', status: 'Active' },
@@ -1075,7 +1075,7 @@
             { id: '623182', name: 'ARIE H', zone1: 'OFF DAY', zone2: '-', status: 'Off Day' }
         ];
 
-        let mitraPlusCouriers = [
+        const defaultMitraPlusCouriers = [
             { id: '982189', name: 'M. RAFIQ', zone1: 'B1', zone2: 'C2', status: 'Active' },
             { id: '969383', name: 'M. HIDAYAT', zone1: 'OFF DAY', zone2: '-', status: 'Off Day' },
             { id: '969386', name: 'RIDUAN', zone1: 'A2', zone2: '-', status: 'Active' },
@@ -1090,6 +1090,14 @@
             { id: '1085212', name: 'RAFLI', zone1: 'C1', zone2: '-', status: 'Active' },
             { id: '1182701', name: 'M. SAIRI', zone1: 'A11', zone2: '-', status: 'Active' }
         ];
+
+        let dedicatedCouriers = JSON.parse(localStorage.getItem('spx_dedicated_couriers')) || defaultDedicatedCouriers;
+        let mitraPlusCouriers = JSON.parse(localStorage.getItem('spx_mitra_couriers')) || defaultMitraPlusCouriers;
+
+        function saveCourierDataToStorage() {
+            localStorage.setItem('spx_dedicated_couriers', JSON.stringify(dedicatedCouriers));
+            localStorage.setItem('spx_mitra_couriers', JSON.stringify(mitraPlusCouriers));
+        }
 
         function getZoneColorClass(zoneValue) {
             switch (zoneValue) {
@@ -1260,6 +1268,7 @@
             else if (value === 'CUTI') target.status = 'Cuti';
             else if (value === 'IZIN') target.status = 'Izin';
 
+            saveCourierDataToStorage(); // SIMPAN PERUBAHAN TAMPILAN
             renderCourierLists();
         }
 
@@ -1278,6 +1287,7 @@
                 target.zone1 = 'A1';
             }
 
+            saveCourierDataToStorage(); // SIMPAN PERUBAHAN TAMPILAN
             renderCourierLists();
         }
 
@@ -1616,4 +1626,3 @@
     </script>
 </body>
 </html>
-
