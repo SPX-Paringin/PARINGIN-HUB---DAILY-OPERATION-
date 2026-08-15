@@ -79,7 +79,7 @@
             background: #94a3b8;
         }
 
-        /* PERBAIKAN STYLES UNTUK EXPORT PNG PRESISI */
+        /* STYLES UNTUK EXPORT PNG PRESISI */
         .rendering-png {
             width: 1440px !important;
             max-width: 1440px !important;
@@ -180,14 +180,13 @@
                     <span class="text-xs font-bold tracking-widest text-white mt-2">EXPRESS</span>
                 </div>
 
-                <input type="file" id="csvFile" accept=".csv" class="hidden">
+                <input type="file" id="csvFile" accept=".csv, text/csv, application/vnd.ms-excel, application/csv, text/x-csv, text/comma-separated-values" class="hidden">
                 <div class="space-y-2 mb-6">
                     <button id="btnImportCsv" onclick="document.getElementById('csvFile').click()" class="w-full bg-spx-orange hover:bg-spx-orange-hover text-white font-bold py-3 px-4 rounded-xl flex items-center gap-3 transition shadow-lg">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
                         <span>Impor File</span>
                     </button>
 
-                    <!-- FITUR EXPORT PNG (PERBAIKAN FITUR GAMBAR PRESISI) -->
                     <button id="btnExportPng" onclick="exportToPNG()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-4 rounded-xl flex items-center gap-3 transition shadow-lg">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
                         <span>Export PNG (HD)</span>
@@ -778,7 +777,7 @@
             { day: 'MINGGU', dedicated: ['ADBILLAH', 'RAHMADI'], plus: ['DAYAT', 'EDWIN', 'DIANSYAH'], driver: ['ARIE(ABACK)'] }
         ];
 
-        // FITUR EXPORT DASHBOARD KE PNG DENGAN PERBAIKAN PRESISI DAN TIDAK TERPOTONG
+        // FITUR EXPORT DASHBOARD KE PNG DENGAN PERBAIKAN PRESISI
         function exportToPNG() {
             const btn = document.getElementById('btnExportPng');
             const originalText = btn.innerHTML;
@@ -1056,7 +1055,6 @@
 
         const statusOptions = ['Active', 'Off Day', 'Cuti', 'Izin'];
 
-        // --- SINKRONISASI DATABROWSER DENGAN LOCALSTORAGE ---
         const defaultDedicatedCouriers = [
             { id: '322079', name: 'HADRI', zone1: 'A1', zone2: '-', status: 'Active' },
             { id: '581155', name: 'ABDILLAH', zone1: 'OFF DAY', zone2: '-', status: 'Off Day' },
@@ -1268,7 +1266,7 @@
             else if (value === 'CUTI') target.status = 'Cuti';
             else if (value === 'IZIN') target.status = 'Izin';
 
-            saveCourierDataToStorage(); // SIMPAN PERUBAHAN TAMPILAN
+            saveCourierDataToStorage();
             renderCourierLists();
         }
 
@@ -1287,7 +1285,7 @@
                 target.zone1 = 'A1';
             }
 
-            saveCourierDataToStorage(); // SIMPAN PERUBAHAN TAMPILAN
+            saveCourierDataToStorage();
             renderCourierLists();
         }
 
@@ -1387,7 +1385,9 @@
 
             Papa.parse(file, {
                 header: true,
-                skipEmptyLines: true,
+                skipEmptyLines: 'greedy',
+                dynamicTyping: true,
+                delimitersToGuess: [',', ';', '\t', '|'],
                 complete: function(results) {
                     rawCsvFields = results.meta.fields || [];
                     rawCsvRows = results.data || [];
