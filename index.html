@@ -4,6 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DAILY OPERATION PARINGIN HUB - SPX Express</title>
+
+    <!-- Firebase SDK Setup -->
+    <script type="module">
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
+      import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-analytics.js";
+      // TODO: Add SDKs for Firebase products that you want to use
+      // https://firebase.google.com/docs/web/setup#available-libraries
+
+      // Your web app's Firebase configuration
+      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+      const firebaseConfig = {
+        apiKey: "AIzaSyAXR7R0KVa8NOJvahXzkLt7p8JbquD5Sbs",
+        authDomain: "spx-paringin-dashboard.firebaseapp.com",
+        projectId: "spx-paringin-dashboard",
+        storageBucket: "spx-paringin-dashboard.firebasestorage.app",
+        messagingSenderId: "652741881848",
+        appId: "1:652741881848:web:bb91a32570010b2fa6b00d",
+        measurementId: "G-TQPK5F4T6K"
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const analytics = getAnalytics(app);
+    </script>
+
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
