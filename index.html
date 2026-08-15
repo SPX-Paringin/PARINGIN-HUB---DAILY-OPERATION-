@@ -1432,197 +1432,230 @@
                 return;
             }
 
-            let headHtml = `<th class="p-3 text-center border-b border-spx-navy bg-spx-navy w-12 text-spx-orange">#</th>`;
+            let headHtml = `<th class="p-3 text-center border-b border-spx-navy w-12 sticky left-0 bg-spx-navy z-30">#</th>`;
             rawCsvFields.forEach(field => {
-                headHtml += `<th class="p-3 border-b border-spx-navy bg-spx-navy text-left whitespace-nowrap">${field}</th>`;
+                headHtml += `<th class="p-3 border-b border-spx-navy whitespace-nowrap">${field}</th>`;
             });
             trHead.innerHTML = headHtml;
 
-            renderMasterTableRows(rawCsvRows);
-        }
-
-        function renderMasterTableRows(rowsToRender) {
-            const tbody = document.getElementById('masterTableBody');
-            
-            if (rowsToRender.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="${rawCsvFields.length + 1}" class="py-8 text-center text-gray-400 italic">Tidak ada data yang cocok dengan pencarian.</td></tr>`;
-                return;
-            }
-
             let bodyHtml = '';
-            rowsToRender.forEach((row, idx) => {
-                bodyHtml += `<tr class="hover:bg-orange-50/50 transition border-b border-gray-100">`;
-                bodyHtml += `<td class="p-2.5 text-center font-bold text-gray-400 bg-gray-50/50 text-[11px]">${idx + 1}</td>`;
+            const limit = Math.min(rawCsvRows.length, 500); 
+
+            for (let i = 0; i < limit; i++) {
+                const row = rawCsvRows[i];
+                bodyHtml += `<tr class="hover:bg-orange-50/40 transition border-b border-gray-100">`;
+                bodyHtml += `<td class="p-2.5 text-center font-bold text-gray-400 sticky left-0 bg-white z-10 border-r border-gray-100">${i + 1}</td>`;
                 
                 rawCsvFields.forEach(field => {
-                    const val = row[field] !== undefined && row[field] !== null ? row[field] : '-';
+                    const val = row[field] !== undefined && row[field] !== null ? row[field] : '';
                     bodyHtml += `<td class="p-2.5 whitespace-nowrap text-gray-700">${val}</td>`;
                 });
-                
                 bodyHtml += `</tr>`;
-            });
+            }
+
+            if (rawCsvRows.length > 500) {
+                bodyHtml += `<tr><td colspan="${rawCsvFields.length + 1}" class="p-3 text-center text-xs font-semibold text-spx-orange bg-orange-50">
+                    Menampilkan 500 data pertama dari total ${rawCsvRows.length.toLocaleString('id-ID')} data untuk optimalisasi performa browser.
+                </td></tr>`;
+            }
 
             tbody.innerHTML = bodyHtml;
         }
 
         function filterMasterTable() {
-            const query = document.getElementById('masterSearchInput').value.toLowerCase().trim();
-            if (!query) {
-                renderMasterTableRows(rawCsvRows);
-                document.getElementById('masterBadgeCount').innerText = `${rawCsvRows.length} Data`;
-                return;
+            const input = document.getElementById('masterSearchInput');
+            const filter = input.value.toUpperCase();
+            const tbody = document.getElementById('masterTableBody');
+            const trs = tbody.getElementsByTagName('tr');
+
+            for (let i = 0; i < trs.length; i++) {
+                const rowText = trs[i].textContent || trs[i].innerText;
+                if (rowText.toUpperCase().indexOf(filter) > -1) {
+                    trs[i].style.display = "";
+                } else {
+                    trs[i].style.display = "none";
+                }
             }
-
-            const filteredRows = rawCsvRows.filter(row => {
-                return rawCsvFields.some(field => {
-                    const val = String(row[field] || '').toLowerCase();
-                    return val.includes(query);
-                });
-            });
-
-            renderMasterTableRows(filteredRows);
-            document.getElementById('masterBadgeCount').innerText = `${filteredRows.length} / ${rawCsvRows.length} Data`;
         }
 
         function processCSVData(rows) {
             initializeDataStructures();
             countHVGlobal = 0;
 
-            const getFieldValue = (row, fieldNames) => {
-                for (let name of fieldNames) {
-                    if (row[name] !== undefined && row[name] !== null) return String(row[name]).trim();
-                }
-                const keys = Object.keys(row);
-                for (let k of keys) {
-                    const cleanK = k.trim().toLowerCase();
-                    for (let target of fieldNames) {
-                        if (cleanK === target.toLowerCase()) return String(row[k]).trim();
-                    }
-                }
-                return '';
-            };
+            if (!rows || rows.length === 0) {
+                renderProjectionTables();
+                return;
+            }
 
-            rows.forEach(r => {
-                const zoneName = getFieldValue(r, ['Zone', 'ZONE', 'Zone ID', 'Zone_ID']).toUpperCase();
-                const bulkyTypeVal = getFieldValue(r, ['Bulky Type', 'BULKY TYPE', 'BulkyType']).toUpperCase();
-                const isBulky = (bulkyTypeVal === 'BULKY');
+            const sample = rows[0];
+            let keyZone = null;
+            let keyService = null;
+            let keyBulky = null;
+            let keyHV = null;
 
-                const hvVal = getFieldValue(r, ['High Value', 'HIGH VALUE', 'HighValue', 'HV', 'High_Value']).toUpperCase();
-                if (hvVal === 'Y' || hvVal === 'YES' || hvVal === 'TRUE') {
+            for (let key in sample) {
+                const lowerKey = key.toLowerCase();
+                if (!keyZone && (lowerKey.includes('zone') || lowerKey.includes('zoning') || lowerKey.includes('area'))) keyZone = key;
+                if (!keyService && (lowerKey.includes('service') || lowerKey.includes('layanan') || lowerKey.includes('type'))) keyService = key;
+                if (!keyBulky && (lowerKey.includes('bulky') || lowerKey.includes('kategori') || lowerKey.includes('category'))) keyBulky = key;
+                if (!keyHV && (lowerKey.includes('hv') || lowerKey.includes('high value') || lowerKey.includes('value'))) keyHV = key;
+            }
+
+            rows.forEach(row => {
+                const rawZone = keyZone ? String(row[keyZone] || '').trim().toUpperCase() : '';
+                const rawService = keyService ? String(row[keyService] || '').trim().toUpperCase() : '';
+                const rawBulky = keyBulky ? String(row[keyBulky] || '').trim().toUpperCase() : '';
+                const rawHV = keyHV ? String(row[keyHV] || '').trim().toUpperCase() : '';
+
+                if (rawHV.includes('YES') || rawHV.includes('TRUE') || rawHV === '1' || rawHV.includes('HIGH')) {
                     countHVGlobal++;
                 }
 
-                if (!zoneName) return;
+                if (!rawZone) return;
 
-                const serviceType = getFieldValue(r, [
-                    'Order Account', 'ORDER ACCOUNT', 'Order_Account', 
-                    'Service', 'SERVICE', 'TYPE', 'Service Type'
-                ]).toUpperCase();
-                
-                const isEco = serviceType.includes('ECO') || serviceType.includes('ECONOMY');
+                const isBulky = rawBulky.includes('BULKY') || rawBulky.includes('HEAVY') || rawBulky.includes('BESAR');
+                const isEco = rawService.includes('ECO') || rawService.includes('HEMAT') || rawService.includes('ECONOMY');
 
                 let targetMap = null;
-                if (masterListZoneA.includes(zoneName)) {
-                    targetMap = dataMapA[zoneName];
-                } else if (masterListZoneBC.includes(zoneName)) {
-                    targetMap = dataMapBC[zoneName];
+                if (masterListZoneA.includes(rawZone)) {
+                    targetMap = dataMapA[rawZone];
+                } else if (masterListZoneBC.includes(rawZone)) {
+                    targetMap = dataMapBC[rawZone];
                 } else {
-                    if (!dataMapOther[zoneName]) {
-                        dataMapOther[zoneName] = { stdNon: 0, ecoNon: 0, stdBulky: 0, ecoBulky: 0 };
+                    if (!dataMapOther[rawZone]) {
+                        dataMapOther[rawZone] = { stdNon: 0, ecoNon: 0, stdBulky: 0, ecoBulky: 0 };
                     }
-                    targetMap = dataMapOther[zoneName];
+                    targetMap = dataMapOther[rawZone];
                 }
 
                 if (targetMap) {
                     if (isBulky) {
-                        isEco ? targetMap.ecoBulky++ : targetMap.stdBulky++;
+                        if (isEco) targetMap.ecoBulky++;
+                        else targetMap.stdBulky++;
                     } else {
-                        isEco ? targetMap.ecoNon++ : targetMap.stdNon++;
+                        if (isEco) targetMap.ecoNon++;
+                        else targetMap.stdNon++;
                     }
                 }
             });
 
-            renderDashboard();
+            renderProjectionTables();
         }
 
-        function renderDashboard() {
-            let htmlA = '', sumA = { stdNon: 0, ecoNon: 0, stdBulky: 0, ecoBulky: 0 };
+        function renderProjectionTables() {
+            let totalStdNon = 0, totalEcoNon = 0, totalStdBulky = 0, totalEcoBulky = 0;
+
+            // Render Zone A
+            const tbodyA = document.getElementById('tableZoneA');
+            let htmlA = '';
+            let sumA_StdNon = 0, sumA_EcoNon = 0, sumA_StdBulky = 0, sumA_EcoBulky = 0;
+
             masterListZoneA.forEach(z => {
-                const val = dataMapA[z];
-                sumA.stdNon += val.stdNon; sumA.ecoNon += val.ecoNon;
-                sumA.stdBulky += val.stdBulky; sumA.ecoBulky += val.ecoBulky;
-                htmlA += `<tr class="hover:bg-orange-50/50 transition">
-                    <td class="p-1.5 font-bold border-r text-left pl-3">${z}</td>
-                    <td class="p-1.5">${val.stdNon}</td>
-                    <td class="p-1.5 border-r">${val.ecoNon}</td>
-                    <td class="p-1.5">${val.stdBulky}</td>
-                    <td class="p-1.5">${val.ecoBulky}</td>
-                </tr>`;
-            });
-            document.getElementById('tableZoneA').innerHTML = htmlA;
-            document.getElementById('sumA_StdNon').innerText = sumA.stdNon;
-            document.getElementById('sumA_EcoNon').innerText = sumA.ecoNon;
-            document.getElementById('sumA_StdBulky').innerText = sumA.stdBulky;
-            document.getElementById('sumA_EcoBulky').innerText = sumA.ecoBulky;
+                const d = dataMapA[z] || { stdNon: 0, ecoNon: 0, stdBulky: 0, ecoBulky: 0 };
+                sumA_StdNon += d.stdNon; sumA_EcoNon += d.ecoNon;
+                sumA_StdBulky += d.stdBulky; sumA_EcoBulky += d.ecoBulky;
 
-            let htmlBC = '', sumBC = { stdNon: 0, ecoNon: 0, stdBulky: 0, ecoBulky: 0 };
+                htmlA += `
+                    <tr class="hover:bg-orange-50/40 transition">
+                        <td class="p-1.5 font-bold text-spx-navy border-r border-gray-100">${z}</td>
+                        <td class="p-1.5 text-gray-700">${d.stdNon || '-'}</td>
+                        <td class="p-1.5 text-gray-700">${d.ecoNon || '-'}</td>
+                        <td class="p-1.5 text-gray-700">${d.stdBulky || '-'}</td>
+                        <td class="p-1.5 text-gray-700">${d.ecoBulky || '-'}</td>
+                    </tr>
+                `;
+            });
+            tbodyA.innerHTML = htmlA;
+            document.getElementById('sumA_StdNon').innerText = sumA_StdNon;
+            document.getElementById('sumA_EcoNon').innerText = sumA_EcoNon;
+            document.getElementById('sumA_StdBulky').innerText = sumA_StdBulky;
+            document.getElementById('sumA_EcoBulky').innerText = sumA_EcoBulky;
+
+            totalStdNon += sumA_StdNon; totalEcoNon += sumA_EcoNon;
+            totalStdBulky += sumA_StdBulky; totalEcoBulky += sumA_EcoBulky;
+
+            // Render Zone B & C
+            const tbodyBC = document.getElementById('tableZoneBC');
+            let htmlBC = '';
+            let sumBC_StdNon = 0, sumBC_EcoNon = 0, sumBC_StdBulky = 0, sumBC_EcoBulky = 0;
+
             masterListZoneBC.forEach(z => {
-                const val = dataMapBC[z];
-                sumBC.stdNon += val.stdNon; sumBC.ecoNon += val.ecoNon;
-                sumBC.stdBulky += val.stdBulky; sumBC.ecoBulky += val.ecoBulky;
-                htmlBC += `<tr class="hover:bg-orange-50/50 transition">
-                    <td class="p-1.5 font-bold border-r text-left pl-3">${z}</td>
-                    <td class="p-1.5">${val.stdNon}</td>
-                    <td class="p-1.5 border-r">${val.ecoNon}</td>
-                    <td class="p-1.5">${val.stdBulky}</td>
-                    <td class="p-1.5">${val.ecoBulky}</td>
-                </tr>`;
-            });
-            document.getElementById('tableZoneBC').innerHTML = htmlBC;
-            document.getElementById('sumBC_StdNon').innerText = sumBC.stdNon;
-            document.getElementById('sumBC_EcoNon').innerText = sumBC.ecoNon;
-            document.getElementById('sumBC_StdBulky').innerText = sumBC.stdBulky;
-            document.getElementById('sumBC_EcoBulky').innerText = sumBC.ecoBulky;
+                const d = dataMapBC[z] || { stdNon: 0, ecoNon: 0, stdBulky: 0, ecoBulky: 0 };
+                sumBC_StdNon += d.stdNon; sumBC_EcoNon += d.ecoNon;
+                sumBC_StdBulky += d.stdBulky; sumBC_EcoBulky += d.ecoBulky;
 
-            let htmlOther = '', sumOther = { stdNon: 0, ecoNon: 0, stdBulky: 0, ecoBulky: 0 };
+                htmlBC += `
+                    <tr class="hover:bg-orange-50/40 transition">
+                        <td class="p-1.5 font-bold text-spx-navy border-r border-gray-100">${z}</td>
+                        <td class="p-1.5 text-gray-700">${d.stdNon || '-'}</td>
+                        <td class="p-1.5 text-gray-700">${d.ecoNon || '-'}</td>
+                        <td class="p-1.5 text-gray-700">${d.stdBulky || '-'}</td>
+                        <td class="p-1.5 text-gray-700">${d.ecoBulky || '-'}</td>
+                    </tr>
+                `;
+            });
+            tbodyBC.innerHTML = htmlBC;
+            document.getElementById('sumBC_StdNon').innerText = sumBC_StdNon;
+            document.getElementById('sumBC_EcoNon').innerText = sumBC_EcoNon;
+            document.getElementById('sumBC_StdBulky').innerText = sumBC_StdBulky;
+            document.getElementById('sumBC_EcoBulky').innerText = sumBC_EcoBulky;
+
+            totalStdNon += sumBC_StdNon; totalEcoNon += sumBC_EcoNon;
+            totalStdBulky += sumBC_StdBulky; totalEcoBulky += sumBC_EcoBulky;
+
+            // Render Other Zone
+            const tbodyOther = document.getElementById('tableOtherZone');
+            let htmlOther = '';
+            let sumOther_StdNon = 0, sumOther_EcoNon = 0, sumOther_StdBulky = 0, sumOther_EcoBulky = 0;
             const otherKeys = Object.keys(dataMapOther);
+
             if (otherKeys.length === 0) {
-                htmlOther = `<tr><td colspan="5" class="py-4 text-gray-400 italic text-center">Tidak ada Zone lain yang terdeteksi.</td></tr>`;
+                tbodyOther.innerHTML = `<tr><td colspan="5" class="py-4 text-gray-400 italic">Tidak ada Zone lain yang terdeteksi.</td></tr>`;
             } else {
                 otherKeys.forEach(z => {
-                    const val = dataMapOther[z];
-                    sumOther.stdNon += val.stdNon; sumOther.ecoNon += val.ecoNon;
-                    sumOther.stdBulky += val.stdBulky; sumOther.ecoBulky += val.ecoBulky;
-                    htmlOther += `<tr class="hover:bg-orange-50/50 transition">
-                        <td class="p-1.5 font-bold border-r text-left pl-3 text-spx-orange">${z}</td>
-                        <td class="p-1.5">${val.stdNon}</td>
-                        <td class="p-1.5 border-r">${val.ecoNon}</td>
-                        <td class="p-1.5">${val.stdBulky}</td>
-                        <td class="p-1.5">${val.ecoBulky}</td>
-                    </tr>`;
-                });
-            }
-            document.getElementById('tableOtherZone').innerHTML = htmlOther;
-            document.getElementById('sumOther_StdNon').innerText = sumOther.stdNon;
-            document.getElementById('sumOther_EcoNon').innerText = sumOther.ecoNon;
-            document.getElementById('sumOther_StdBulky').innerText = sumOther.stdBulky;
-            document.getElementById('sumOther_EcoBulky').innerText = sumOther.ecoBulky;
+                    const d = dataMapOther[z];
+                    sumOther_StdNon += d.stdNon; sumOther_EcoNon += d.ecoNon;
+                    sumOther_StdBulky += d.stdBulky; sumOther_EcoBulky += d.ecoBulky;
 
-            const grandNonBulky = sumA.stdNon + sumA.ecoNon + sumBC.stdNon + sumBC.ecoNon + sumOther.stdNon + sumOther.ecoNon;
-            const grandBulky = sumA.stdBulky + sumA.ecoBulky + sumBC.stdBulky + sumBC.ecoBulky + sumOther.stdBulky + sumOther.ecoBulky;
-            const grandProjection = rawCsvRows.length; 
+                    htmlOther += `
+                        <tr class="hover:bg-orange-50/40 transition">
+                            <td class="p-1.5 font-bold text-spx-navy border-r border-gray-100">${z}</td>
+                            <td class="p-1.5 text-gray-700">${d.stdNon || '-'}</td>
+                            <td class="p-1.5 text-gray-700">${d.ecoNon || '-'}</td>
+                            <td class="p-1.5 text-gray-700">${d.stdBulky || '-'}</td>
+                            <td class="p-1.5 text-gray-700">${d.ecoBulky || '-'}</td>
+                        </tr>
+                    `;
+                });
+                tbodyOther.innerHTML = htmlOther;
+            }
+
+            document.getElementById('sumOther_StdNon').innerText = sumOther_StdNon;
+            document.getElementById('sumOther_EcoNon').innerText = sumOther_EcoNon;
+            document.getElementById('sumOther_StdBulky').innerText = sumOther_StdBulky;
+            document.getElementById('sumOther_EcoBulky').innerText = sumOther_EcoBulky;
+
+            totalStdNon += sumOther_StdNon; totalEcoNon += sumOther_EcoNon;
+            totalStdBulky += sumOther_StdBulky; totalEcoBulky += sumOther_EcoBulky;
+
+            // Update Metric Cards
+            const grandNonBulky = totalStdNon + totalEcoNon;
+            const grandBulky = totalStdBulky + totalEcoBulky;
+            const grandTotal = grandNonBulky + grandBulky;
 
             document.getElementById('statNonBulky').innerText = grandNonBulky.toLocaleString('id-ID');
             document.getElementById('statBulky').innerText = grandBulky.toLocaleString('id-ID');
-            document.getElementById('statProjection').innerText = grandProjection.toLocaleString('id-ID');
+            document.getElementById('statProjection').innerText = grandTotal.toLocaleString('id-ID');
             document.getElementById('statHV').innerText = countHVGlobal.toLocaleString('id-ID');
         }
 
-        updateWitaHeaderDate();
-        initializeDataStructures();
-        loadSavedCsvData();
-        renderCourierLists();
-        renderOffDayTable();
+        // INITIALIZATION UPON PAGE LOAD
+        window.addEventListener('DOMContentLoaded', () => {
+            updateWitaHeaderDate();
+            renderOffDayTable();
+            renderCourierLists();
+            loadSavedCsvData();
+        });
     </script>
 </body>
 </html>
