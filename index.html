@@ -86,10 +86,10 @@
                         spx: {
                             orange: '#FF5722',
                             'orange-hover': '#E64A19',
-                            dark: '#132238',
-                            navy: '#1B2A4A',
-                            'navy-light': '#2A3F6D',
-                            bg: '#F4F6F9'
+                            dark: '#0F172A',
+                            navy: '#1E293B',
+                            'navy-light': '#334155',
+                            bg: '#F1F5F9'
                         }
                     }
                 }
@@ -97,12 +97,15 @@
         }
     </script>
     <!-- Font Inter & Google Arabic Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Amiri&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Amiri:wght@700&display=swap" rel="stylesheet">
     <!-- PapaParse CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
     <!-- html2canvas CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
+        html {
+            font-size: 15px; /* Skala font ditingkatkan agar lebih jelas & tajam */
+        }
         body { 
             font-family: 'Inter', sans-serif; 
             -webkit-font-smoothing: antialiased;
@@ -136,8 +139,8 @@
         }
 
         .custom-scroll::-webkit-scrollbar {
-            width: 6px;
-            height: 6px;
+            width: 7px;
+            height: 7px;
         }
         .custom-scroll::-webkit-scrollbar-track {
             background: #f1f1f1;
@@ -176,11 +179,11 @@
         }
     </style>
 </head>
-<body class="bg-spx-bg min-h-screen text-gray-800 flex flex-col justify-between" onclick="closeAllDropdowns(event)">
+<body class="bg-spx-bg min-h-screen text-slate-900 flex flex-col justify-between" onclick="closeAllDropdowns(event)">
 
     <!-- ==================== MODAL LOGIN SYSTEM ==================== -->
     <div id="loginModal" class="fixed inset-0 z-50 bg-spx-dark/80 backdrop-blur-md flex items-center justify-center p-4">
-        <div class="bg-white rounded-2xl shadow-2xl border border-gray-100 max-w-md w-full p-6 sm:p-8 space-y-6 fade-in relative overflow-hidden">
+        <div class="bg-white rounded-2xl shadow-2xl border border-slate-200 max-w-md w-full p-6 sm:p-8 space-y-6 fade-in relative overflow-hidden">
             
             <div class="flex justify-center -mb-2">
                 <div class="relative animate-mini-bounce">
@@ -198,43 +201,43 @@
 
             <div class="text-center space-y-1">
                 <div class="inline-flex items-center gap-2 mb-1">
-                    <span class="text-4xl font-extrabold italic tracking-tighter text-spx-orange">SPX</span>
-                    <span class="text-sm font-bold tracking-widest text-spx-navy mt-2">EXPRESS</span>
+                    <span class="text-4xl font-black italic tracking-tighter text-spx-orange">SPX</span>
+                    <span class="text-sm font-black tracking-widest text-spx-navy mt-2">EXPRESS</span>
                 </div>
-                <h2 class="text-xl font-bold text-spx-navy tracking-tight">PARINGIN HUB DASHBOARD</h2>
-                <p class="text-xs text-gray-500 font-medium">Silakan pilih Hak Akses Masuk untuk melanjutkan</p>
+                <h2 class="text-2xl font-extrabold text-spx-navy tracking-tight">PARINGIN HUB DASHBOARD</h2>
+                <p class="text-xs text-slate-600 font-bold">Silakan pilih Hak Akses Masuk untuk melanjutkan</p>
             </div>
 
-            <div class="grid grid-cols-2 gap-2 bg-gray-100 p-1 rounded-xl">
-                <button type="button" id="roleBtnGhost" onclick="setRoleSelection('GHOST')" class="py-2.5 text-xs font-semibold rounded-lg transition bg-spx-navy text-white shadow">
+            <div class="grid grid-cols-2 gap-2 bg-slate-100 p-1 rounded-xl border border-slate-200">
+                <button type="button" id="roleBtnGhost" onclick="setRoleSelection('GHOST')" class="py-2.5 text-xs font-bold rounded-lg transition bg-spx-navy text-white shadow">
                     GHOST / KURIR
                 </button>
-                <button type="button" id="roleBtnAdmin" onclick="setRoleSelection('ADMIN')" class="py-2.5 text-xs font-semibold rounded-lg transition text-gray-600 hover:text-spx-navy">
+                <button type="button" id="roleBtnAdmin" onclick="setRoleSelection('ADMIN')" class="py-2.5 text-xs font-bold rounded-lg transition text-slate-700 hover:text-spx-navy">
                     ADMIN / Ops
                 </button>
             </div>
 
             <div class="space-y-4">
                 <div id="ghostInfoBox" class="bg-orange-50 border border-orange-200 text-spx-orange rounded-xl p-4 text-xs space-y-1">
-                    <p class="font-bold flex items-center gap-1.5">
+                    <p class="font-extrabold flex items-center gap-1.5 text-xs">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                         Akses Mode View Only (Kurir)
                     </p>
-                    <p class="text-gray-600 leading-relaxed">Anda tidak membutuhkan password. Akses ini hanya untuk melihat data dashboard (Read-Only).</p>
+                    <p class="text-slate-700 font-medium leading-relaxed">Anda tidak membutuhkan password. Akses ini hanya untuk melihat data dashboard (Read-Only).</p>
                 </div>
 
                 <div id="adminPasswordBox" class="space-y-2 hidden">
-                    <label class="block text-xs font-bold text-gray-700">Password Ops</label>
+                    <label class="block text-xs font-extrabold text-slate-800">Password Ops</label>
                     <input type="password" id="adminPasswordInput" placeholder="Masukkan password Admin..." 
-                           class="w-full text-sm px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:border-spx-orange transition shadow-sm"
+                           class="w-full text-sm px-4 py-3 border border-slate-300 rounded-xl focus:outline-none focus:border-spx-orange transition shadow-sm font-semibold"
                            onkeypress="if(event.key === 'Enter') handleLoginSubmit()">
-                    <p id="passwordError" class="text-xs text-rose-500 font-bold hidden flex items-center gap-1">
-                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    <p id="passwordError" class="text-xs text-rose-600 font-extrabold hidden flex items-center gap-1">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                         Password salah, silakan coba lagi!
                     </p>
                 </div>
 
-                <button type="button" onclick="handleLoginSubmit()" class="w-full bg-spx-orange hover:bg-spx-orange-hover text-white font-bold py-3.5 px-4 rounded-xl transition shadow-lg flex items-center justify-center gap-2 text-sm tracking-wide">
+                <button type="button" onclick="handleLoginSubmit()" class="w-full bg-spx-orange hover:bg-spx-orange-hover text-white font-extrabold py-3.5 px-4 rounded-xl transition shadow-lg flex items-center justify-center gap-2 text-sm tracking-wide">
                     <span>Masuk Dashboard</span>
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
                 </button>
@@ -249,37 +252,33 @@
             <div>
                 <div class="flex items-center gap-2 px-2 py-4 mb-4">
                     <span class="text-3xl font-black italic tracking-tighter text-spx-orange">SPX</span>
-                    <span class="text-xs font-bold tracking-widest text-white mt-2">EXPRESS</span>
+                    <span class="text-xs font-black tracking-widest text-white mt-2">EXPRESS</span>
                 </div>
 
                 <input type="file" id="csvFile" accept=".csv, text/csv, application/vnd.ms-excel, application/csv, text/x-csv, text/comma-separated-values" class="hidden">
                 <div class="space-y-2 mb-6">
-                    <button id="btnImportCsv" onclick="document.getElementById('csvFile').click()" class="w-full bg-spx-orange hover:bg-spx-orange-hover text-white font-bold py-3 px-4 rounded-xl flex items-center gap-3 transition shadow-lg">
+                    <button id="btnImportCsv" onclick="document.getElementById('csvFile').click()" class="w-full bg-spx-orange hover:bg-spx-orange-hover text-white font-extrabold py-3 px-4 rounded-xl flex items-center gap-3 transition shadow-lg text-sm">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
                         <span>Impor File</span>
                     </button>
 
-                    <button id="btnExportPng" onclick="exportToPNG()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-4 rounded-xl flex items-center gap-3 transition shadow-lg">
+                    <button id="btnExportPng" onclick="exportToPNG()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold py-3 px-4 rounded-xl flex items-center gap-3 transition shadow-lg text-sm">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
                         <span>Export PNG (HD)</span>
                     </button>
                 </div>
 
-                <nav class="space-y-1 text-sm font-medium">
-                    <button onclick="switchView('projection')" id="nav-projection" class="w-full flex items-center gap-3 px-3 py-3 rounded-lg bg-spx-navy-light text-white font-semibold transition">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
-                        Projection Inbound
+                <nav class="space-y-1 text-sm font-bold">
+                    <button onclick="switchView('projection-schedule')" id="nav-projection-schedule" class="w-full flex items-center gap-3 px-3 py-3 rounded-lg bg-spx-navy-light text-white font-bold transition">
+                        <svg class="w-5 h-5 text-spx-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                        PROJECTION & SCHEDULE
                     </button>
-                    <button onclick="switchView('schedule')" id="nav-schedule" class="w-full flex items-center gap-3 px-3 py-3 rounded-lg text-gray-200 hover:bg-spx-navy-light transition font-semibold">
-                        <svg class="w-5 h-5 text-spx-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>
-                        Schedule Delivery
-                    </button>
-                    <button onclick="switchView('master')" id="nav-master" class="w-full flex items-center gap-3 px-3 py-3 rounded-lg text-gray-300 hover:bg-spx-navy-light transition">
+                    <button onclick="switchView('master')" id="nav-master" class="w-full flex items-center gap-3 px-3 py-3 rounded-lg text-slate-300 hover:bg-spx-navy-light transition">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 002 2H5a2 2 0 00-2-2v-6a2 2 0 01-2-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
                         Data Impor
                     </button>
                     
-                    <button onclick="logout()" class="w-full flex items-center gap-3 px-3 py-3 rounded-lg text-rose-400 hover:bg-rose-500/10 hover:text-rose-300 transition mt-6 font-semibold">
+                    <button onclick="logout()" class="w-full flex items-center gap-3 px-3 py-3 rounded-lg text-rose-400 hover:bg-rose-500/10 hover:text-rose-300 transition mt-6 font-bold">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
                         Logout
                     </button>
@@ -310,32 +309,32 @@
 
                 <div class="relative z-10">
                     <div class="flex items-center gap-3">
-                        <h1 class="text-2xl font-bold tracking-wide">DAILY OPERATION</h1>
-                        <span id="roleBadge" class="bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">ADMIN / OPS</span>
+                        <h1 class="text-3xl font-black tracking-wide">DAILY OPERATION</h1>
+                        <span id="roleBadge" class="bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 text-xs font-black px-3 py-1 rounded-full uppercase tracking-wider">ADMIN / OPS</span>
                     </div>
-                    <p class="text-xs text-blue-200/70 font-medium tracking-wider mt-0.5">JADWAL DRIVER/RIDER DEDICATED & PLUS PARINGIN HUB</p>
+                    <p class="text-xs text-blue-100 font-bold tracking-wider mt-0.5">JADWAL DRIVER/RIDER DEDICATED & PLUS PARINGIN HUB</p>
                 </div>
                 
                 <div class="flex items-center gap-3 text-xs relative z-10">
-                    <div class="bg-spx-navy/80 border border-blue-400/20 rounded-lg px-3 py-1.5 flex items-center gap-2">
+                    <div class="bg-spx-navy/90 border border-slate-600 rounded-lg px-3 py-1.5 flex items-center gap-2">
                         <svg class="w-4 h-4 text-spx-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
                         <div>
-                            <span class="text-blue-200/60 block text-[10px]">Tanggal (WITA)</span>
-                            <span class="font-bold text-white" id="currentDate">--/--/----</span>
+                            <span class="text-slate-300 block text-xs font-semibold">Tanggal (WITA)</span>
+                            <span class="font-black text-white text-sm" id="currentDate">--/--/----</span>
                         </div>
                     </div>
-                    <div class="bg-spx-navy/80 border border-blue-400/20 rounded-lg px-3 py-1.5 flex items-center gap-2">
+                    <div class="bg-spx-navy/90 border border-slate-600 rounded-lg px-3 py-1.5 flex items-center gap-2">
                         <svg class="w-4 h-4 text-spx-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                         <div>
-                            <span class="text-blue-200/60 block text-[10px]">Hari Ini</span>
-                            <span class="font-bold text-white" id="currentDay">---</span>
+                            <span class="text-slate-300 block text-xs font-semibold">Hari Ini</span>
+                            <span class="font-black text-white text-sm" id="currentDay">---</span>
                         </div>
                     </div>
-                    <div class="bg-spx-navy/80 border border-blue-400/20 rounded-lg px-3 py-1.5 flex items-center gap-2">
+                    <div class="bg-spx-navy/90 border border-slate-600 rounded-lg px-3 py-1.5 flex items-center gap-2">
                         <svg class="w-4 h-4 text-spx-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
                         <div>
-                            <span class="text-blue-200/60 block text-[10px]">Last Update Data</span>
-                            <span class="font-bold text-white" id="lastUpdate">Belum Ada File</span>
+                            <span class="text-slate-300 block text-xs font-semibold">Last Update Data</span>
+                            <span class="font-black text-white text-sm" id="lastUpdate">Belum Ada File</span>
                         </div>
                     </div>
                 </div>
@@ -346,65 +345,62 @@
                 
                 <!-- TAB SWITCHER -->
                 <div class="flex flex-wrap items-center gap-2">
-                    <button onclick="switchView('projection')" id="tab-projection" class="bg-spx-orange text-white font-bold px-6 py-2.5 rounded-lg text-sm flex items-center gap-2 shadow-sm transition">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 002 2H5a2 2 0 00-2-2v-6a2 2 0 01-2-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
-                        PROJECTION INBOUND
+                    <button onclick="switchView('projection-schedule')" id="tab-projection-schedule" class="bg-spx-orange text-white font-black px-6 py-2.5 rounded-lg text-sm flex items-center gap-2 shadow transition">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                        PROJECTION & SCHEDULE
                     </button>
-                    <button onclick="switchView('schedule')" id="tab-schedule" class="bg-spx-navy text-white font-bold text-sm px-6 py-2.5 rounded-lg flex items-center gap-2 hover:bg-spx-navy-light transition shadow-sm">
-                        <svg class="w-4 h-4 text-spx-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>
-                        SCHEDULE DELIVERY
-                    </button>
-                    <button onclick="switchView('master')" id="tab-master" class="bg-spx-navy text-white font-bold px-6 py-2.5 rounded-lg text-sm flex items-center gap-2 hover:bg-spx-navy-light transition">
+                    <button onclick="switchView('master')" id="tab-master" class="bg-spx-navy text-white font-black px-6 py-2.5 rounded-lg text-sm flex items-center gap-2 hover:bg-spx-navy-light transition">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 1.1.9 2 2 2h12a2 2 0 002-2V7M4 7a2 2 0 012-2h12a2 2 0 002 2M4 7h16M9 11h6m-6 4h4"/></svg>
                         DATA IMPOR
                     </button>
                 </div>
 
-                <!-- ==================== VIEW 1: PROJECTION INBOUND ==================== -->
-                <div id="view-projection" class="space-y-6 fade-in">
+                <!-- ==================== VIEW 1 & 2 MERGED: PROJECTION & SCHEDULE ==================== -->
+                <div id="view-projection-schedule" class="space-y-6 fade-in">
                     
+                    <!-- SECTION 1: PROJECTION CARDS & TABLES -->
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                        <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex items-center gap-4">
-                            <div class="w-14 h-14 rounded-xl bg-spx-dark flex items-center justify-center text-white flex-shrink-0">
+                        <div class="bg-white p-4 rounded-xl shadow border border-slate-300 flex items-center gap-4">
+                            <div class="w-14 h-14 rounded-xl bg-spx-dark flex items-center justify-center text-white flex-shrink-0 shadow-sm">
                                 <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
                             </div>
                             <div>
-                                <p class="text-xs font-bold text-spx-navy uppercase tracking-wider">TOTAL NON-BULKY</p>
-                                <h2 class="text-2xl font-bold text-spx-dark mt-0.5" id="statNonBulky">0</h2>
-                                <p class="text-[11px] text-gray-400">Parcel</p>
+                                <p class="text-xs font-black text-spx-navy uppercase tracking-wider">TOTAL NON-BULKY</p>
+                                <h2 class="text-3xl font-black text-slate-900 mt-0.5" id="statNonBulky">0</h2>
+                                <p class="text-xs font-bold text-slate-600">Parcel</p>
                             </div>
                         </div>
 
-                        <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex items-center gap-4">
-                            <div class="w-14 h-14 rounded-xl bg-spx-orange flex items-center justify-center text-white flex-shrink-0">
+                        <div class="bg-white p-4 rounded-xl shadow border border-slate-300 flex items-center gap-4">
+                            <div class="w-14 h-14 rounded-xl bg-spx-orange flex items-center justify-center text-white flex-shrink-0 shadow-sm">
                                 <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 01-2-2V5a2 2 0 012-2h14a2 2 0 012 2v1a2 2 0 01-2 2M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"/></svg>
                             </div>
                             <div>
-                                <p class="text-xs font-bold text-spx-orange uppercase tracking-wider">TOTAL BULKY TYPE</p>
-                                <h2 class="text-2xl font-bold text-spx-dark mt-0.5" id="statBulky">0</h2>
-                                <p class="text-[11px] text-gray-400">Parcel</p>
+                                <p class="text-xs font-black text-spx-orange uppercase tracking-wider">TOTAL BULKY TYPE</p>
+                                <h2 class="text-3xl font-black text-slate-900 mt-0.5" id="statBulky">0</h2>
+                                <p class="text-xs font-bold text-slate-600">Parcel</p>
                             </div>
                         </div>
 
-                        <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex items-center gap-4">
-                            <div class="w-14 h-14 rounded-xl bg-spx-navy flex items-center justify-center text-white flex-shrink-0">
+                        <div class="bg-white p-4 rounded-xl shadow border border-slate-300 flex items-center gap-4">
+                            <div class="w-14 h-14 rounded-xl bg-spx-navy flex items-center justify-center text-white flex-shrink-0 shadow-sm">
                                 <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 002 2H5a2 2 0 00-2-2v-6a2 2 0 01-2-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
                             </div>
                             <div>
-                                <p class="text-xs font-bold text-spx-navy uppercase tracking-wider">TOTAL PROJECTION</p>
-                                <h2 class="text-2xl font-bold text-spx-dark mt-0.5" id="statProjection">0</h2>
-                                <p class="text-[11px] text-gray-400">Parcel</p>
+                                <p class="text-xs font-black text-spx-navy uppercase tracking-wider">TOTAL PROJECTION</p>
+                                <h2 class="text-3xl font-black text-slate-900 mt-0.5" id="statProjection">0</h2>
+                                <p class="text-xs font-bold text-slate-600">Parcel</p>
                             </div>
                         </div>
 
-                        <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex items-center gap-4">
-                            <div class="w-14 h-14 rounded-xl bg-spx-orange flex items-center justify-center text-white flex-shrink-0">
+                        <div class="bg-white p-4 rounded-xl shadow border border-slate-300 flex items-center gap-4">
+                            <div class="w-14 h-14 rounded-xl bg-spx-orange flex items-center justify-center text-white flex-shrink-0 shadow-sm">
                                 <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                             </div>
                             <div>
-                                <p class="text-xs font-bold text-spx-orange uppercase tracking-wider">QUANTITY HV</p>
-                                <h2 class="text-2xl font-bold text-spx-dark mt-0.5" id="statHV">0</h2>
-                                <p class="text-[11px] text-gray-400">Order</p>
+                                <p class="text-xs font-black text-spx-orange uppercase tracking-wider">QUANTITY HV</p>
+                                <h2 class="text-3xl font-black text-slate-900 mt-0.5" id="statHV">0</h2>
+                                <p class="text-xs font-bold text-slate-600">Order</p>
                             </div>
                         </div>
                     </div>
@@ -413,76 +409,76 @@
                         <div class="lg:col-span-2 space-y-6">
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <!-- ZONE A TABLE -->
-                                <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden flex flex-col justify-between">
+                                <div class="bg-white rounded-xl shadow border border-slate-300 overflow-hidden flex flex-col justify-between">
                                     <div>
-                                        <div class="p-3 bg-gray-50 border-b border-gray-200">
-                                            <h3 class="font-bold text-xs text-spx-navy uppercase">PERKIRAAN INBOUND PER ZONE (A) ALL TRIP</h3>
+                                        <div class="p-3 bg-slate-100 border-b border-slate-300">
+                                            <h3 class="font-black text-sm text-spx-navy uppercase tracking-wide">PERKIRAAN INBOUND PER ZONE (A) ALL TRIP</h3>
                                         </div>
                                         <div class="overflow-x-auto">
-                                            <table class="w-full text-[11px] text-center border-collapse">
+                                            <table class="w-full text-sm text-center border-collapse">
                                                 <thead>
-                                                    <tr class="bg-spx-navy text-white font-semibold">
-                                                        <th class="p-1.5 border border-spx-navy" rowspan="2">ZONE</th>
-                                                        <th class="p-1.5 border border-spx-navy" colspan="2">NON-BULKY TYPE</th>
-                                                        <th class="p-1.5 border border-spx-navy" colspan="2">BULKY TYPE</th>
+                                                    <tr class="bg-slate-900 text-white font-black border-b border-slate-800">
+                                                        <th class="p-2 border border-slate-700 text-xs" rowspan="2">ZONE</th>
+                                                        <th class="p-2 border border-slate-700 text-xs" colspan="2">NON-BULKY TYPE</th>
+                                                        <th class="p-2 border border-slate-700 text-xs" colspan="2">BULKY TYPE</th>
                                                     </tr>
-                                                    <tr class="bg-spx-navy text-white font-semibold text-[10px]">
-                                                        <th class="p-1 border border-spx-navy">STD</th>
-                                                        <th class="p-1 border border-spx-navy">ECO</th>
-                                                        <th class="p-1 border border-spx-navy">STD</th>
-                                                        <th class="p-1 border border-spx-navy">ECO</th>
+                                                    <tr class="bg-slate-800 text-white font-bold text-xs">
+                                                        <th class="p-1.5 border border-slate-700">STD</th>
+                                                        <th class="p-1.5 border border-slate-700">ECO</th>
+                                                        <th class="p-1.5 border border-slate-700">STD</th>
+                                                        <th class="p-1.5 border border-slate-700">ECO</th>
                                                     </tr>
                                                 </thead>
-                                                <tbody id="tableZoneA" class="divide-y divide-gray-100"></tbody>
+                                                <tbody id="tableZoneA" class="divide-y divide-slate-200 text-slate-900 font-bold"></tbody>
                                             </table>
                                         </div>
                                     </div>
-                                    <table class="w-full text-[11px] text-center border-collapse">
-                                        <tfoot class="bg-spx-navy text-white font-bold">
+                                    <table class="w-full text-sm text-center border-collapse">
+                                        <tfoot class="bg-slate-900 text-white font-black text-sm">
                                             <tr>
-                                                <td class="p-2 w-[28%] text-left pl-3">TOTAL</td>
-                                                <td class="p-2" id="sumA_StdNon">0</td>
-                                                <td class="p-2" id="sumA_EcoNon">0</td>
-                                                <td class="p-2" id="sumA_StdBulky">0</td>
-                                                <td class="p-2" id="sumA_EcoBulky">0</td>
+                                                <td class="p-2.5 w-[28%] text-left pl-3 border border-slate-800 text-xs font-black">TOTAL</td>
+                                                <td class="p-2.5 border border-slate-800 text-base" id="sumA_StdNon">0</td>
+                                                <td class="p-2.5 border border-slate-800 text-base" id="sumA_EcoNon">0</td>
+                                                <td class="p-2.5 border border-slate-800 text-base" id="sumA_StdBulky">0</td>
+                                                <td class="p-2.5 border border-slate-800 text-base" id="sumA_EcoBulky">0</td>
                                             </tr>
                                         </tfoot>
                                     </table>
                                 </div>
 
                                 <!-- ZONE B & C TABLE -->
-                                <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden flex flex-col justify-between">
+                                <div class="bg-white rounded-xl shadow border border-slate-300 overflow-hidden flex flex-col justify-between">
                                     <div>
-                                        <div class="p-3 bg-gray-50 border-b border-gray-200">
-                                            <h3 class="font-bold text-xs text-spx-navy uppercase">PERKIRAAN INBOUND PER ZONE (B & C) ALL TRIP</h3>
+                                        <div class="p-3 bg-slate-100 border-b border-slate-300">
+                                            <h3 class="font-black text-sm text-spx-navy uppercase tracking-wide">PERKIRAAN INBOUND PER ZONE (B & C) ALL TRIP</h3>
                                         </div>
                                         <div class="overflow-x-auto">
-                                            <table class="w-full text-[11px] text-center border-collapse">
+                                            <table class="w-full text-sm text-center border-collapse">
                                                 <thead>
-                                                    <tr class="bg-spx-navy text-white font-semibold">
-                                                        <th class="p-1.5 border border-spx-navy" rowspan="2">ZONE</th>
-                                                        <th class="p-1.5 border border-spx-navy" colspan="2">NON-BULKY TYPE</th>
-                                                        <th class="p-1.5 border border-spx-navy" colspan="2">BULKY TYPE</th>
+                                                    <tr class="bg-slate-900 text-white font-black border-b border-slate-800">
+                                                        <th class="p-2 border border-slate-700 text-xs" rowspan="2">ZONE</th>
+                                                        <th class="p-2 border border-slate-700 text-xs" colspan="2">NON-BULKY TYPE</th>
+                                                        <th class="p-2 border border-slate-700 text-xs" colspan="2">BULKY TYPE</th>
                                                     </tr>
-                                                    <tr class="bg-spx-navy text-white font-semibold text-[10px]">
-                                                        <th class="p-1 border border-spx-navy">STD</th>
-                                                        <th class="p-1 border border-spx-navy">ECO</th>
-                                                        <th class="p-1 border border-spx-navy">STD</th>
-                                                        <th class="p-1 border border-spx-navy">ECO</th>
+                                                    <tr class="bg-slate-800 text-white font-bold text-xs">
+                                                        <th class="p-1.5 border border-slate-700">STD</th>
+                                                        <th class="p-1.5 border border-slate-700">ECO</th>
+                                                        <th class="p-1.5 border border-slate-700">STD</th>
+                                                        <th class="p-1.5 border border-slate-700">ECO</th>
                                                     </tr>
                                                 </thead>
-                                                <tbody id="tableZoneBC" class="divide-y divide-gray-100"></tbody>
+                                                <tbody id="tableZoneBC" class="divide-y divide-slate-200 text-slate-900 font-bold"></tbody>
                                             </table>
                                         </div>
                                     </div>
-                                    <table class="w-full text-[11px] text-center border-collapse">
-                                        <tfoot class="bg-spx-navy text-white font-bold">
+                                    <table class="w-full text-sm text-center border-collapse">
+                                        <tfoot class="bg-slate-900 text-white font-black text-sm">
                                             <tr>
-                                                <td class="p-2 w-[28%] text-left pl-3">TOTAL</td>
-                                                <td class="p-2" id="sumBC_StdNon">0</td>
-                                                <td class="p-2" id="sumBC_EcoNon">0</td>
-                                                <td class="p-2" id="sumBC_StdBulky">0</td>
-                                                <td class="p-2" id="sumBC_EcoBulky">0</td>
+                                                <td class="p-2.5 w-[28%] text-left pl-3 border border-slate-800 text-xs font-black">TOTAL</td>
+                                                <td class="p-2.5 border border-slate-800 text-base" id="sumBC_StdNon">0</td>
+                                                <td class="p-2.5 border border-slate-800 text-base" id="sumBC_EcoNon">0</td>
+                                                <td class="p-2.5 border border-slate-800 text-base" id="sumBC_StdBulky">0</td>
+                                                <td class="p-2.5 border border-slate-800 text-base" id="sumBC_EcoBulky">0</td>
                                             </tr>
                                         </tfoot>
                                     </table>
@@ -490,36 +486,36 @@
                             </div>
 
                             <!-- OTHER ZONE TABLE -->
-                            <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-                                <div class="p-3 bg-gray-50 border-b border-gray-200 flex justify-between items-center">
-                                    <h3 class="font-bold text-xs text-spx-orange uppercase">PERKIRAAN INBOUND PER ZONE (OTHER ZONE) ALL TRIP</h3>
-                                    <span class="text-[10px] bg-orange-100 text-spx-orange font-bold px-2 py-0.5 rounded">Deteksi Otomatis CSV</span>
+                            <div class="bg-white rounded-xl shadow border border-slate-300 overflow-hidden">
+                                <div class="p-3 bg-slate-100 border-b border-slate-300 flex justify-between items-center">
+                                    <h3 class="font-black text-sm text-spx-orange uppercase tracking-wide">PERKIRAAN INBOUND PER ZONE (OTHER ZONE) ALL TRIP</h3>
+                                    <span class="text-xs bg-orange-100 text-spx-orange font-black px-2.5 py-1 rounded border border-orange-300">Deteksi Otomatis CSV</span>
                                 </div>
                                 <div class="overflow-x-auto">
-                                    <table class="w-full text-[11px] text-center border-collapse">
+                                    <table class="w-full text-sm text-center border-collapse">
                                         <thead>
-                                            <tr class="bg-spx-navy text-white font-semibold">
-                                                <th class="p-1.5 border border-spx-navy" rowspan="2">ZONE</th>
-                                                <th class="p-1.5 border border-spx-navy" colspan="2">NON-BULKY TYPE</th>
-                                                <th class="p-1.5 border border-spx-navy" colspan="2">BULKY TYPE</th>
+                                            <tr class="bg-slate-900 text-white font-black border-b border-slate-800">
+                                                <th class="p-2 border border-slate-700 text-xs" rowspan="2">ZONE</th>
+                                                <th class="p-2 border border-slate-700 text-xs" colspan="2">NON-BULKY TYPE</th>
+                                                <th class="p-2 border border-slate-700 text-xs" colspan="2">BULKY TYPE</th>
                                             </tr>
-                                            <tr class="bg-spx-navy text-white font-semibold text-[10px]">
-                                                <th class="p-1 border border-spx-navy">STD</th>
-                                                <th class="p-1 border border-spx-navy">ECO</th>
-                                                <th class="p-1 border border-spx-navy">STD</th>
-                                                <th class="p-1 border border-spx-navy">ECO</th>
+                                            <tr class="bg-slate-800 text-white font-bold text-xs">
+                                                <th class="p-1.5 border border-slate-700">STD</th>
+                                                <th class="p-1.5 border border-slate-700">ECO</th>
+                                                <th class="p-1.5 border border-slate-700">STD</th>
+                                                <th class="p-1.5 border border-slate-700">ECO</th>
                                             </tr>
                                         </thead>
-                                        <tbody id="tableOtherZone" class="divide-y divide-gray-100">
-                                            <tr><td colspan="5" class="py-4 text-gray-400 italic">Tidak ada Zone lain yang terdeteksi.</td></tr>
+                                        <tbody id="tableOtherZone" class="divide-y divide-slate-200 text-slate-900 font-bold">
+                                            <tr><td colspan="5" class="py-4 text-slate-500 font-bold italic">Tidak ada Zone lain yang terdeteksi.</td></tr>
                                         </tbody>
-                                        <tfoot class="bg-spx-navy text-white font-bold">
+                                        <tfoot class="bg-slate-900 text-white font-black text-sm">
                                             <tr>
-                                                <td class="p-2 text-left pl-3">TOTAL</td>
-                                                <td class="p-2" id="sumOther_StdNon">0</td>
-                                                <td class="p-2" id="sumOther_EcoNon">0</td>
-                                                <td class="p-2" id="sumOther_StdBulky">0</td>
-                                                <td class="p-2" id="sumOther_EcoBulky">0</td>
+                                                <td class="p-2.5 text-left pl-3 border border-slate-800 text-xs font-black">TOTAL</td>
+                                                <td class="p-2.5 border border-slate-800 text-base" id="sumOther_StdNon">0</td>
+                                                <td class="p-2.5 border border-slate-800 text-base" id="sumOther_EcoNon">0</td>
+                                                <td class="p-2.5 border border-slate-800 text-base" id="sumOther_StdBulky">0</td>
+                                                <td class="p-2.5 border border-slate-800 text-base" id="sumOther_EcoBulky">0</td>
                                             </tr>
                                         </tfoot>
                                     </table>
@@ -529,206 +525,202 @@
 
                         <!-- KOLOM KANAN: WIDGET -->
                         <div class="lg:col-span-1 space-y-6">
-                            <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 relative overflow-hidden">
-                                <div class="flex items-center gap-2 text-spx-orange font-bold text-xs tracking-wider uppercase mb-4">
-                                    <div class="w-6 h-6 rounded-full bg-spx-orange text-white flex items-center justify-center text-[10px]">💬</div>
+                            <div class="bg-white p-6 rounded-2xl shadow border border-slate-300 relative overflow-hidden">
+                                <div class="flex items-center gap-2 text-spx-orange font-black text-xs tracking-wider uppercase mb-4">
+                                    <div class="w-6 h-6 rounded-full bg-spx-orange text-white flex items-center justify-center text-xs font-bold">💬</div>
                                     DAILY MOTIVATION
                                 </div>
                                 <blockquote class="relative">
                                     <span class="text-6xl text-spx-orange/20 font-serif absolute -top-8 -left-2">“</span>
-                                    <p class="text-gray-700 italic font-medium leading-relaxed text-center my-4 relative z-10">
+                                    <p class="text-slate-800 italic font-bold leading-relaxed text-center my-4 relative z-10 text-base">
                                         Matamu Itu Lelah Bukan Karena Kurang Tidur, Tapi Karena Penuh Dendam
                                     </p>
                                     <span class="text-6xl text-spx-orange/20 font-serif absolute -bottom-10 -right-2">”</span>
                                 </blockquote>
                             </div>
 
-                            <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-200">
-                                <div class="flex items-center gap-2 text-spx-orange font-bold text-xs tracking-wider uppercase mb-4">
-                                    <div class="w-6 h-6 rounded-full bg-spx-orange text-white flex items-center justify-center text-[10px]">📖</div>
+                            <div class="bg-white p-6 rounded-2xl shadow border border-slate-300">
+                                <div class="flex items-center gap-2 text-spx-orange font-black text-xs tracking-wider uppercase mb-4">
+                                    <div class="w-6 h-6 rounded-full bg-spx-orange text-white flex items-center justify-center text-xs font-bold">📖</div>
                                     HADIS OF THE DAY
                                 </div>
                                 <div class="text-center space-y-4">
-                                    <p class="font-arabic text-2xl font-bold text-gray-800 leading-loose">الَّطهُورُ شَطْرُ الْإِيمَانِ</p>
-                                    <p class="text-xs text-gray-600 italic">"Kebersihan itu adalah sebagian dari iman"</p>
-                                    <p class="text-[11px] text-gray-400 font-bold uppercase tracking-wider pt-2 border-t border-gray-100">HR. Imam Muslim</p>
-                                    <p class="text-[9px] text-gray-400">Shahih Muslim, Jilid 1, Halaman 203<br>Hadis No. 223 (Kitab At-Thaharah)</p>
+                                    <p class="font-arabic text-3xl font-black text-slate-900 leading-loose">الَّطهُورُ شَطْرُ الْإِيمَانِ</p>
+                                    <p class="text-sm text-slate-800 font-bold italic">"Kebersihan itu adalah sebagian dari iman"</p>
+                                    <p class="text-xs text-slate-700 font-black uppercase tracking-wider pt-2 border-t border-slate-200">HR. Imam Muslim</p>
+                                    <p class="text-xs text-slate-500 font-bold">Shahih Muslim, Jilid 1, Halaman 203<br>Hadis No. 223 (Kitab At-Thaharah)</p>
                                 </div>
                             </div>
 
-                            <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 border-l-4 border-l-spx-orange">
-                                <div class="flex items-center gap-2 text-spx-navy font-bold text-xs tracking-wider uppercase mb-4">
-                                    <div class="w-6 h-6 rounded-full bg-spx-navy text-white flex items-center justify-center text-[10px]">💼</div>
+                            <div class="bg-white p-6 rounded-2xl shadow border border-slate-300 border-l-4 border-l-spx-orange">
+                                <div class="flex items-center gap-2 text-spx-navy font-black text-xs tracking-wider uppercase mb-4">
+                                    <div class="w-6 h-6 rounded-full bg-spx-navy text-white flex items-center justify-center text-xs font-bold">💼</div>
                                     BEKERJA ADALAH JIHAD
                                 </div>
                                 <div class="text-center space-y-3">
-                                    <p class="font-arabic text-lg font-bold text-gray-800 leading-loose">
+                                    <p class="font-arabic text-2xl font-black text-slate-900 leading-loose">
                                         إِنْ كَانَ خَرَجَ يَسْعَى عَلَى وَلَدِهِ صِغَارًا فَهُوَ فِي سَبِيلِ اللَّهِ
                                     </p>
-                                    <p class="text-xs text-gray-600 italic leading-relaxed">
+                                    <p class="text-sm text-slate-800 font-bold italic leading-relaxed">
                                         "Jika seseorang keluar bekerja untuk menafkahi anak-anaknya yang masih kecil, maka ia berada di jalan Allah (Sabilillah)."
                                     </p>
-                                    <div class="pt-2 border-t border-gray-100">
-                                        <p class="text-[10px] text-gray-500 font-bold uppercase tracking-wider">HR. AT-THABRANI</p>
-                                        <p class="text-[9px] text-gray-400">Al-Mu'jam al-Kabir | Status: Hasan (Silsilah As-Shahihah No. 2232)</p>
+                                    <div class="pt-2 border-t border-slate-200">
+                                        <p class="text-xs text-slate-700 font-black uppercase tracking-wider">HR. AT-THABRANI</p>
+                                        <p class="text-xs text-slate-500 font-bold">Al-Mu'jam al-Kabir | Status: Hasan (Silsilah As-Shahihah No. 2232)</p>
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
-                </div>
 
-                <!-- ==================== VIEW 2: SCHEDULE DELIVERY ==================== -->
-                <div id="view-schedule" class="space-y-6 hidden fade-in">
-                    
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                        <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-100 flex items-center gap-4">
-                            <div class="w-14 h-14 rounded-xl bg-spx-dark flex items-center justify-center text-white flex-shrink-0">
+                    <!-- SECTION 2: SCHEDULE CARDS & TABLES -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 pt-4 border-t border-slate-300">
+                        <div class="bg-white p-5 rounded-xl shadow border border-slate-300 flex items-center gap-4">
+                            <div class="w-14 h-14 rounded-xl bg-spx-dark flex items-center justify-center text-white flex-shrink-0 shadow-sm">
                                 <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
                             </div>
                             <div>
-                                <p class="text-xs font-bold text-spx-navy uppercase tracking-wider">TOTAL COURIER ACTIVE</p>
-                                <h2 class="text-2xl font-bold text-spx-dark mt-0.5" id="statActiveCourier">0</h2>
-                                <p class="text-xs text-emerald-600 font-semibold" id="statActiveDetail">0 Active</p>
+                                <p class="text-xs font-black text-spx-navy uppercase tracking-wider">TOTAL COURIER ACTIVE</p>
+                                <h2 class="text-3xl font-black text-slate-900 mt-0.5" id="statActiveCourier">0</h2>
+                                <p class="text-xs text-emerald-700 font-black" id="statActiveDetail">0 Active</p>
                             </div>
                         </div>
 
-                        <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-100 flex items-center gap-4">
-                            <div class="w-14 h-14 rounded-xl bg-spx-orange flex items-center justify-center text-white flex-shrink-0">
+                        <div class="bg-white p-5 rounded-xl shadow border border-slate-300 flex items-center gap-4">
+                            <div class="w-14 h-14 rounded-xl bg-spx-orange flex items-center justify-center text-white flex-shrink-0 shadow-sm">
                                 <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 4H6a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-2m-4-1v8m0 0l3-3m-3 3L9 8m-5 5h2.586a1 1 0 01.707.293l2.414 2.414a1 1 0 00.707.293h3.172a1 1 0 00.707-.293l2.414-2.414a1 1 0 01.707-.293H20"/></svg>
                             </div>
                             <div>
-                                <p class="text-xs font-bold text-spx-orange uppercase tracking-wider">RIDER DEDICATED</p>
-                                <h2 class="text-2xl font-bold text-spx-dark mt-0.5" id="statDedicated">0 Active</h2>
-                                <p class="text-xs text-gray-500 font-medium">Hub Dedicated Staff</p>
+                                <p class="text-xs font-black text-spx-orange uppercase tracking-wider">RIDER DEDICATED</p>
+                                <h2 class="text-3xl font-black text-slate-900 mt-0.5" id="statDedicated">0 Active</h2>
+                                <p class="text-xs text-slate-600 font-bold">Hub Dedicated Staff</p>
                             </div>
                         </div>
 
-                        <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-100 flex items-center gap-4">
-                            <div class="w-14 h-14 rounded-xl bg-spx-navy flex items-center justify-center text-white flex-shrink-0">
+                        <div class="bg-white p-5 rounded-xl shadow border border-slate-300 flex items-center gap-4">
+                            <div class="w-14 h-14 rounded-xl bg-spx-navy flex items-center justify-center text-white flex-shrink-0 shadow-sm">
                                 <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
                             </div>
                             <div>
-                                <p class="text-xs font-bold text-spx-navy uppercase tracking-wider">KURIR PLUS LIST</p>
-                                <h2 class="text-2xl font-bold text-spx-dark mt-0.5" id="statMitraPlus">0 Active</h2>
-                                <p class="text-xs text-gray-500 font-medium">Hub Plus Staff</p>
+                                <p class="text-xs font-black text-spx-navy uppercase tracking-wider">KURIR PLUS LIST</p>
+                                <h2 class="text-3xl font-black text-slate-900 mt-0.5" id="statMitraPlus">0 Active</h2>
+                                <p class="text-xs text-slate-600 font-bold">Hub Plus Staff</p>
                             </div>
                         </div>
 
-                        <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-100 flex items-center gap-4">
-                            <div class="w-14 h-14 rounded-xl bg-rose-500 flex items-center justify-center text-white flex-shrink-0">
+                        <div class="bg-white p-5 rounded-xl shadow border border-slate-300 flex items-center gap-4">
+                            <div class="w-14 h-14 rounded-xl bg-rose-600 flex items-center justify-center text-white flex-shrink-0 shadow-sm">
                                 <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                             </div>
                             <div>
-                                <p class="text-xs font-bold text-rose-500 uppercase tracking-wider">OFF / CUTI / IZIN</p>
-                                <h2 class="text-2xl font-bold text-spx-dark mt-0.5" id="statOffDay">0 Person</h2>
-                                <p class="text-xs text-rose-500 font-semibold">Non-Active Total</p>
+                                <p class="text-xs font-black text-rose-600 uppercase tracking-wider">OFF / CUTI / IZIN</p>
+                                <h2 class="text-3xl font-black text-slate-900 mt-0.5" id="statOffDay">0 Person</h2>
+                                <p class="text-xs text-rose-600 font-black">Non-Active Total</p>
                             </div>
                         </div>
                     </div>
 
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                        <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+                        <div class="bg-white rounded-xl shadow border border-slate-300 overflow-hidden">
                             <div class="p-4 bg-spx-navy text-white flex justify-between items-center border-b border-spx-navy">
                                 <div class="flex items-center gap-2">
                                     <svg class="w-5 h-5 text-spx-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
-                                    <h3 class="font-bold text-xs tracking-wider uppercase">RIDER/DRIVER LIST — DEDICATED</h3>
+                                    <h3 class="font-black text-sm tracking-wider uppercase">RIDER/DRIVER LIST — DEDICATED</h3>
                                 </div>
-                                <span class="bg-spx-orange text-white text-xs font-bold px-2.5 py-1 rounded">DEDICATED</span>
+                                <span class="bg-spx-orange text-white text-xs font-black px-2.5 py-1 rounded">DEDICATED</span>
                             </div>
                             <div class="overflow-x-auto">
-                                <table class="w-full text-xs text-left border-collapse">
+                                <table class="w-full text-sm text-left border-collapse">
                                     <thead>
-                                        <tr class="bg-gray-100 text-spx-navy uppercase font-bold border-b border-gray-200 text-[11px]">
+                                        <tr class="bg-slate-200 text-spx-navy uppercase font-black border-b border-slate-300 text-xs">
                                             <th class="p-3">Nama Kurir</th>
                                             <th class="p-3 text-center min-w-[200px]">Zone Cover</th>
                                             <th class="p-3 text-center min-w-[110px]">Status</th>
                                         </tr>
                                     </thead>
-                                    <tbody id="listDedicated" class="divide-y divide-gray-100 text-xs"></tbody>
+                                    <tbody id="listDedicated" class="divide-y divide-slate-200 text-sm text-slate-900 font-bold"></tbody>
                                 </table>
                             </div>
                         </div>
 
-                        <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+                        <div class="bg-white rounded-xl shadow border border-slate-300 overflow-hidden">
                             <div class="p-4 bg-spx-navy text-white flex justify-between items-center border-b border-spx-navy">
                                 <div class="flex items-center gap-2">
                                     <svg class="w-5 h-5 text-spx-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
-                                    <h3 class="font-bold text-xs tracking-wider uppercase">KURIR PLUS LIST — MITRA PLUS</h3>
+                                    <h3 class="font-black text-sm tracking-wider uppercase">KURIR PLUS LIST — MITRA PLUS</h3>
                                 </div>
-                                <span class="bg-emerald-600 text-white text-xs font-bold px-2.5 py-1 rounded">MITRA PLUS</span>
+                                <span class="bg-emerald-600 text-white text-xs font-black px-2.5 py-1 rounded">MITRA PLUS</span>
                             </div>
                             <div class="overflow-x-auto">
-                                <table class="w-full text-xs text-left border-collapse">
+                                <table class="w-full text-sm text-left border-collapse">
                                     <thead>
-                                        <tr class="bg-gray-100 text-spx-navy uppercase font-bold border-b border-gray-200 text-[11px]">
+                                        <tr class="bg-slate-200 text-spx-navy uppercase font-black border-b border-slate-300 text-xs">
                                             <th class="p-3">Nama Kurir</th>
                                             <th class="p-3 text-center min-w-[200px]">Zone Cover</th>
                                             <th class="p-3 text-center min-w-[110px]">Status</th>
                                         </tr>
                                     </thead>
-                                    <tbody id="listMitraPlus" class="divide-y divide-gray-100 text-xs"></tbody>
+                                    <tbody id="listMitraPlus" class="divide-y divide-slate-200 text-sm text-slate-900 font-bold"></tbody>
                                 </table>
                             </div>
                         </div>
 
                     </div>
 
-                    <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden fade-in">
+                    <div class="bg-white rounded-xl shadow border border-slate-300 overflow-hidden fade-in">
                         <div class="p-4 bg-spx-navy text-white flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b border-spx-navy">
                             <div class="flex items-center gap-3">
-                                <div class="w-9 h-9 rounded-xl bg-spx-orange flex items-center justify-center text-white shadow-md flex-shrink-0">
+                                <div class="w-9 h-9 rounded-xl bg-spx-orange flex items-center justify-center text-white shadow flex-shrink-0">
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
                                 </div>
                                 <div>
-                                    <h3 class="font-bold text-sm tracking-wide uppercase flex items-center gap-2">
+                                    <h3 class="font-black text-base tracking-wide uppercase flex items-center gap-2">
                                         JADWAL OFF DAY RIDER / DRIVER PARINGIN HUB
                                         <span class="relative flex h-2 w-2">
                                           <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
                                           <span class="relative inline-flex rounded-full h-2 w-2 bg-rose-500"></span>
                                         </span>
                                     </h3>
-                                    <p class="text-xs text-blue-200/90 font-medium">Jadwal Libur Rutin Mingguan Rider Dedicated, Rider Plus & Driver</p>
+                                    <p class="text-xs text-blue-100 font-bold">Jadwal Libur Rutin Mingguan Rider Dedicated, Rider Plus & Driver</p>
                                 </div>
                             </div>
-                            <div class="text-xs bg-spx-navy-light px-3 py-1.5 rounded-lg border border-blue-400/20 text-blue-100 flex items-center gap-2 font-bold">
-                                <svg class="w-3.5 h-3.5 text-spx-orange animate-spin" style="animation-duration: 6s;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                            <div class="text-xs bg-spx-navy-light px-3 py-1.5 rounded-lg border border-slate-500 text-white flex items-center gap-2 font-black">
+                                <svg class="w-4 h-4 text-spx-orange animate-spin" style="animation-duration: 6s;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                                 <span>Sorotan Otomatis Hari Ini</span>
                             </div>
                         </div>
 
                         <div class="overflow-x-auto">
-                            <table class="w-full text-xs text-left border-collapse">
+                            <table class="w-full text-sm text-left border-collapse">
                                 <thead>
-                                    <tr class="bg-gray-100 text-spx-navy uppercase font-bold border-b border-gray-200 text-[11px]">
+                                    <tr class="bg-slate-200 text-spx-navy uppercase font-black border-b border-slate-300 text-xs">
                                         <th class="p-3 text-center min-w-[100px]">
                                             <div class="flex items-center justify-center gap-1.5">
-                                                <svg class="w-3.5 h-3.5 text-spx-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                                                <svg class="w-4 h-4 text-spx-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
                                                 HARI
                                             </div>
                                         </th>
                                         <th class="p-3">
-                                            <div class="flex items-center gap-1.5 text-spx-orange font-bold">
-                                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+                                            <div class="flex items-center gap-1.5 text-spx-orange font-black">
+                                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
                                                 RIDER DEDICATED
                                             </div>
                                         </th>
                                         <th class="p-3">
-                                            <div class="flex items-center gap-1.5 text-emerald-600 font-bold">
-                                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+                                            <div class="flex items-center gap-1.5 text-emerald-700 font-black">
+                                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
                                                 RIDER PLUS
                                             </div>
                                         </th>
                                         <th class="p-3">
-                                            <div class="flex items-center gap-1.5 text-purple-600 font-bold">
-                                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 17a2 2 0 100 4 2 2 0 000-4zm10 0a2 2 0 100 4 2 2 0 000-4zM5 16l2-8h11l2 8H5z"/></svg>
+                                            <div class="flex items-center gap-1.5 text-purple-800 font-black">
+                                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 17a2 2 0 100 4 2 2 0 000-4zm10 0a2 2 0 100 4 2 2 0 000-4zM5 16l2-8h11l2 8H5z"/></svg>
                                                 DRIVER
                                             </div>
                                         </th>
                                     </tr>
                                 </thead>
-                                <tbody id="tableOffDaySchedule" class="divide-y divide-gray-100 font-medium"></tbody>
+                                <tbody id="tableOffDaySchedule" class="divide-y divide-slate-200 font-bold text-sm"></tbody>
                             </table>
                         </div>
                     </div>
@@ -739,71 +731,71 @@
                 <div id="view-master" class="space-y-6 hidden fade-in">
                     
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex items-center gap-4">
+                        <div class="bg-white p-4 rounded-xl shadow border border-slate-300 flex items-center gap-4">
                             <div class="w-12 h-12 rounded-xl bg-spx-orange text-white flex items-center justify-center font-bold">
                                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
                             </div>
                             <div>
-                                <p class="text-xs font-bold text-gray-400 uppercase tracking-wider">TOTAL BARIS DATA</p>
-                                <h3 class="text-2xl font-bold text-spx-dark mt-0.5" id="masterTotalRows">0</h3>
-                                <p class="text-[11px] text-gray-400">Record Terimpor</p>
+                                <p class="text-xs font-black text-slate-600 uppercase tracking-wider">TOTAL BARIS DATA</p>
+                                <h3 class="text-2xl font-black text-slate-900 mt-0.5" id="masterTotalRows">0</h3>
+                                <p class="text-xs text-slate-500 font-bold">Record Terimpor</p>
                             </div>
                         </div>
 
-                        <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex items-center gap-4">
+                        <div class="bg-white p-4 rounded-xl shadow border border-slate-300 flex items-center gap-4">
                             <div class="w-12 h-12 rounded-xl bg-spx-navy text-white flex items-center justify-center font-bold">
                                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"/></svg>
                             </div>
                             <div>
-                                <p class="text-xs font-bold text-gray-400 uppercase tracking-wider">TOTAL KOLOM HEADER</p>
-                                <h3 class="text-2xl font-bold text-spx-dark mt-0.5" id="masterTotalCols">0</h3>
-                                <p class="text-[11px] text-gray-400">Field Deteksi CSV</p>
+                                <p class="text-xs font-black text-slate-600 uppercase tracking-wider">TOTAL KOLOM HEADER</p>
+                                <h3 class="text-2xl font-black text-slate-900 mt-0.5" id="masterTotalCols">0</h3>
+                                <p class="text-xs text-slate-500 font-bold">Field Deteksi CSV</p>
                             </div>
                         </div>
 
-                        <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex items-center gap-4">
-                            <div class="w-12 h-12 rounded-xl bg-emerald-500 text-white flex items-center justify-center font-bold">
+                        <div class="bg-white p-4 rounded-xl shadow border border-slate-300 flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-emerald-600 text-white flex items-center justify-center font-bold">
                                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
                             </div>
                             <div>
-                                <p class="text-xs font-bold text-gray-400 uppercase tracking-wider">STATUS IMPOR</p>
-                                <h3 class="text-base font-bold text-emerald-600 mt-0.5" id="masterStatus">Belum Ada File</h3>
-                                <p class="text-[11px] text-gray-400" id="masterFileName">Unggah CSV untuk mengisi tabel</p>
+                                <p class="text-xs font-black text-slate-600 uppercase tracking-wider">STATUS IMPOR</p>
+                                <h3 class="text-base font-black text-emerald-700 mt-0.5" id="masterStatus">Belum Ada File</h3>
+                                <p class="text-xs text-slate-500 font-bold" id="masterFileName">Unggah CSV untuk mengisi tabel</p>
                             </div>
                         </div>
                     </div>
 
-                    <div class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden flex flex-col">
+                    <div class="bg-white rounded-2xl shadow border border-slate-300 overflow-hidden flex flex-col">
                         
-                        <div class="p-4 bg-gray-50 border-b border-gray-200 flex flex-col md:flex-row justify-between items-center gap-3">
+                        <div class="p-4 bg-slate-100 border-b border-slate-300 flex flex-col md:flex-row justify-between items-center gap-3">
                             <div class="flex items-center gap-2">
                                 <div class="w-3 h-3 rounded-full bg-spx-orange"></div>
-                                <h3 class="font-bold text-xs text-spx-navy uppercase tracking-wide">RAW MASTER DATA (CSV)</h3>
-                                <span class="bg-gray-200 text-gray-700 text-[10px] font-bold px-2 py-0.5 rounded-full" id="masterBadgeCount">0 Data</span>
+                                <h3 class="font-black text-sm text-spx-navy uppercase tracking-wide">RAW MASTER DATA (CSV)</h3>
+                                <span class="bg-slate-300 text-slate-900 text-xs font-black px-2.5 py-0.5 rounded-full" id="masterBadgeCount">0 Data</span>
                             </div>
 
                             <div class="relative w-full md:w-72">
                                 <input type="text" id="masterSearchInput" onkeyup="filterMasterTable()" placeholder="Cari data mentah CSV..." 
-                                       class="w-full text-xs pl-9 pr-3 py-2 bg-white border border-gray-300 rounded-lg focus:outline-none focus:border-spx-orange transition shadow-sm">
-                                <svg class="w-4 h-4 text-gray-400 absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                                       class="w-full text-xs pl-9 pr-3 py-2 bg-white border border-slate-300 rounded-lg focus:outline-none focus:border-spx-orange transition shadow-sm font-semibold">
+                                <svg class="w-4 h-4 text-slate-400 absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
                             </div>
                         </div>
 
                         <div class="overflow-x-auto max-h-[580px] overflow-y-auto custom-scroll relative">
                             <table class="w-full text-xs text-left border-collapse">
-                                <thead class="sticky top-0 z-20 bg-spx-navy text-white text-[11px] font-bold tracking-wider uppercase">
+                                <thead class="sticky top-0 z-20 bg-spx-navy text-white text-xs font-black tracking-wider uppercase">
                                     <tr id="masterTableHeadRow">
                                         <th class="p-3 text-center border-b border-spx-navy w-12">#</th>
-                                        <th class="p-3 italic text-gray-300">Belum ada data CSV yang di-impor. Silakan klik tombol "Impor File CSV" di menu sebelah kiri.</th>
+                                        <th class="p-3 italic text-slate-300">Belum ada data CSV yang di-impor. Silakan klik tombol "Impor File CSV" di menu sebelah kiri.</th>
                                     </tr>
                                 </thead>
-                                <tbody id="masterTableBody" class="divide-y divide-gray-100 font-medium">
+                                <tbody id="masterTableBody" class="divide-y divide-slate-200 font-semibold text-slate-900">
                                     <tr>
-                                        <td colspan="10" class="py-12 text-center text-gray-400">
+                                        <td colspan="10" class="py-12 text-center text-slate-500">
                                             <div class="flex flex-col items-center justify-center gap-2">
-                                                <svg class="w-12 h-12 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-                                                <p class="font-semibold text-gray-500">Tabel Master Data Masih Kosong</p>
-                                                <p class="text-xs text-gray-400">Silakan impor file CSV melalui tombol di sidebar untuk melihat isi data mentah secara otomatis.</p>
+                                                <svg class="w-12 h-12 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                                                <p class="font-bold text-slate-700">Tabel Master Data Masih Kosong</p>
+                                                <p class="text-xs text-slate-500 font-semibold">Silakan impor file CSV melalui tombol di sidebar untuk melihat isi data mentah secara otomatis.</p>
                                             </div>
                                         </td>
                                     </tr>
@@ -820,15 +812,15 @@
     </div>
 
     <!-- FOOTER -->
-    <footer class="bg-spx-dark text-gray-300 text-xs px-6 py-4 flex flex-col md:flex-row justify-between items-center gap-2 border-t border-slate-700/60 relative overflow-hidden">
+    <footer class="bg-spx-dark text-slate-300 text-xs px-6 py-4 flex flex-col md:flex-row justify-between items-center gap-2 border-t border-slate-700/60 relative overflow-hidden font-bold">
         <p class="relative z-10">© 2026 SPX Express Paringin Hub. All Rights Reserved.</p>
-        <div class="flex items-center gap-2 font-bold tracking-widest text-white relative z-10">
+        <div class="flex items-center gap-2 font-black tracking-widest text-white relative z-10">
             <svg class="w-4 h-4 text-spx-orange" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12 2L4 5V11C4 16.55 7.84 21.74 12 23C16.16 21.74 20 16.55 20 11V5L12 2Z"/>
             </svg>
             <span>SPX DAILY OPERATION DASHBOARD</span>
         </div>
-        <p class="relative z-10 font-medium text-spx-orange">Created by Abi Husein</p>
+        <p class="relative z-10 font-bold text-spx-orange">Created by Abi Husein</p>
     </footer>
 
     <!-- LOGIC PROCESSING JAVASCRIPT -->
@@ -866,7 +858,7 @@
                     useCORS: true,
                     allowTaint: true,
                     logging: false,
-                    backgroundColor: '#F4F6F9',
+                    backgroundColor: '#F1F5F9',
                     scrollX: 0,
                     scrollY: 0,
                     windowWidth: 1440,
@@ -885,10 +877,8 @@
                     const dateStr = now.toISOString().slice(0, 10);
                     
                     let tabName = 'DASHBOARD';
-                    if (!document.getElementById('view-projection').classList.contains('hidden')) {
-                        tabName = 'PROJECTION';
-                    } else if (!document.getElementById('view-schedule').classList.contains('hidden')) {
-                        tabName = 'SCHEDULE';
+                    if (!document.getElementById('view-projection-schedule').classList.contains('hidden')) {
+                        tabName = 'PROJECTION_SCHEDULE';
                     } else if (!document.getElementById('view-master').classList.contains('hidden')) {
                         tabName = 'MASTER_DATA';
                     }
@@ -939,23 +929,23 @@
                                 (todayName === 'JUMAT' && item.day === "JUM'AT"));
 
                 const rowClass = isToday 
-                    ? 'bg-orange-100/80 border-l-4 border-l-spx-orange font-bold' 
-                    : 'hover:bg-orange-50/40 transition border-b border-gray-100';
+                    ? 'bg-orange-100 border-l-4 border-l-spx-orange font-black text-slate-900 border-b border-orange-200' 
+                    : 'hover:bg-orange-50/60 transition border-b border-slate-200 text-slate-900 font-bold';
 
                 const makePills = (arr, colorType) => {
-                    if (!arr || arr.length === 0) return '<span class="text-gray-300 font-medium text-xs italic">-</span>';
+                    if (!arr || arr.length === 0) return '<span class="text-slate-400 font-bold text-xs italic">-</span>';
                     
                     let bgClasses = '';
                     if (colorType === 'dedicated') {
-                        bgClasses = 'bg-orange-100 text-spx-orange border-orange-200';
+                        bgClasses = 'bg-orange-200 text-spx-orange border-orange-300 font-black';
                     } else if (colorType === 'plus') {
-                        bgClasses = 'bg-emerald-100 text-emerald-800 border-emerald-200';
+                        bgClasses = 'bg-emerald-200 text-emerald-900 border-emerald-300 font-black';
                     } else {
-                        bgClasses = 'bg-purple-100 text-purple-800 border-purple-200';
+                        bgClasses = 'bg-purple-200 text-purple-950 border-purple-300 font-black';
                     }
 
                     return arr.map(name => `
-                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-semibold border ${bgClasses}">
+                        <span class="inline-flex items-center px-2.5 py-1 rounded-md text-xs border ${bgClasses}">
                             ${name}
                         </span>
                     `).join(' ');
@@ -964,10 +954,10 @@
                 html += `
                     <tr class="${rowClass}">
                         <td class="p-3 text-center">
-                            <span class="inline-flex items-center gap-1.5 font-bold text-spx-navy text-xs">
-                                ${isToday ? '<span class="w-2 h-2 rounded-full bg-spx-orange animate-ping"></span>' : ''}
+                            <span class="inline-flex items-center gap-1.5 font-black text-slate-900 text-xs">
+                                ${isToday ? '<span class="w-2.5 h-2.5 rounded-full bg-spx-orange animate-ping"></span>' : ''}
                                 ${item.day}
-                                ${isToday ? '<span class="text-[9px] bg-spx-orange text-white px-1.5 py-0.5 rounded font-bold ml-1 uppercase">HARI INI</span>' : ''}
+                                ${isToday ? '<span class="text-xs bg-spx-orange text-white px-2 py-0.5 rounded font-black ml-1 uppercase shadow-sm">HARI INI</span>' : ''}
                             </span>
                         </td>
                         <td class="p-3">
@@ -1052,13 +1042,13 @@
             errBox.classList.add('hidden');
 
             if (role === 'GHOST') {
-                btnGhost.className = "py-2.5 text-xs font-semibold rounded-lg transition bg-spx-navy text-white shadow";
-                btnAdmin.className = "py-2.5 text-xs font-semibold rounded-lg transition text-gray-600 hover:text-spx-navy";
+                btnGhost.className = "py-2.5 text-xs font-bold rounded-lg transition bg-spx-navy text-white shadow";
+                btnAdmin.className = "py-2.5 text-xs font-bold rounded-lg transition text-slate-700 hover:text-spx-navy";
                 ghostInfo.classList.remove('hidden');
                 adminBox.classList.add('hidden');
             } else {
-                btnAdmin.className = "py-2.5 text-xs font-semibold rounded-lg transition bg-spx-navy text-white shadow";
-                btnGhost.className = "py-2.5 text-xs font-semibold rounded-lg transition text-gray-600 hover:text-spx-navy";
+                btnAdmin.className = "py-2.5 text-xs font-bold rounded-lg transition bg-spx-navy text-white shadow";
+                btnGhost.className = "py-2.5 text-xs font-bold rounded-lg transition text-slate-700 hover:text-spx-navy";
                 ghostInfo.classList.add('hidden');
                 adminBox.classList.remove('hidden');
                 document.getElementById('adminPasswordInput').focus();
@@ -1093,7 +1083,7 @@
                 btnImport.title = "Akses Impor khusus Admin/Ops";
 
                 roleBadge.innerText = 'VIEWER ONLY (KURIR)';
-                roleBadge.className = 'bg-amber-500/20 text-amber-400 border border-amber-500/30 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider';
+                roleBadge.className = 'bg-amber-500/20 text-amber-400 border border-amber-500/40 text-xs font-black px-3 py-1 rounded-full uppercase tracking-wider';
             } else {
                 btnImport.disabled = false;
                 btnImport.classList.remove('opacity-40', 'cursor-not-allowed');
@@ -1101,7 +1091,7 @@
                 btnImport.title = "";
 
                 roleBadge.innerText = 'ADMIN / OPS';
-                roleBadge.className = 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider';
+                roleBadge.className = 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 text-xs font-black px-3 py-1 rounded-full uppercase tracking-wider';
             }
 
             renderCourierLists();
@@ -1180,21 +1170,21 @@
 
         function getZoneColorClass(zoneValue) {
             switch (zoneValue) {
-                case 'OFF DAY': return 'bg-rose-100 text-rose-700 border-rose-300 font-semibold';
-                case 'CUTI': return 'bg-sky-100 text-sky-800 border-sky-300 font-semibold';
-                case 'IZIN': return 'bg-amber-100 text-amber-800 border-amber-300 font-semibold';
-                case 'KANTOR': return 'bg-purple-100 text-purple-800 border-purple-300 font-semibold';
-                case '-': return 'bg-gray-50 text-gray-400 border-gray-200';
-                default: return 'bg-white text-gray-900 border-gray-300 font-semibold';
+                case 'OFF DAY': return 'bg-rose-200 text-rose-900 border-rose-400 font-black';
+                case 'CUTI': return 'bg-sky-200 text-sky-900 border-sky-400 font-black';
+                case 'IZIN': return 'bg-amber-200 text-amber-900 border-amber-400 font-black';
+                case 'KANTOR': return 'bg-purple-200 text-purple-900 border-purple-400 font-black';
+                case '-': return 'bg-slate-100 text-slate-400 border-slate-300 font-bold';
+                default: return 'bg-white text-slate-900 border-slate-400 font-black';
             }
         }
 
         function getStatusColorClass(statusValue) {
             switch (statusValue) {
-                case 'Off Day': return 'bg-rose-600 text-white font-medium';
-                case 'Cuti': return 'bg-sky-600 text-white font-medium';
-                case 'Izin': return 'bg-amber-600 text-white font-medium';
-                default: return 'bg-emerald-600 text-white font-medium';
+                case 'Off Day': return 'bg-rose-600 text-white font-black';
+                case 'Cuti': return 'bg-sky-600 text-white font-black';
+                case 'Izin': return 'bg-amber-600 text-white font-black';
+                default: return 'bg-emerald-600 text-white font-black';
             }
         }
 
@@ -1256,7 +1246,7 @@
                     
                     const optionsHtml = zoneOptions.map(z => `
                         <div onclick="selectZone('${type}', ${index}, ${zoneNum}, '${z}')" 
-                             class="dropdown-item px-3 py-1.5 hover:bg-spx-orange hover:text-white cursor-pointer rounded transition font-semibold text-xs ${currentVal === z ? 'bg-orange-50 text-spx-orange' : 'text-gray-800'}">
+                             class="dropdown-item px-3 py-1.5 hover:bg-spx-orange hover:text-white cursor-pointer rounded transition font-bold text-xs ${currentVal === z ? 'bg-orange-100 text-spx-orange' : 'text-slate-800'}">
                             ${z}
                         </div>
                     `).join('');
@@ -1264,15 +1254,15 @@
                     return `
                         <div class="relative custom-dropdown-container w-full">
                             <button type="button" ${isGhost ? 'disabled' : ''} onclick="toggleDropdown('${dropdownId}', event)" 
-                                    class="text-xs rounded-lg px-2 py-1.5 text-center border shadow-sm transition w-full flex items-center justify-between gap-1 ${colorClass} ${isGhost ? 'cursor-default opacity-85' : 'cursor-pointer'}">
+                                    class="text-xs rounded-lg px-2.5 py-1.5 text-center border shadow-sm transition w-full flex items-center justify-between gap-1 ${colorClass} ${isGhost ? 'cursor-default opacity-90' : 'cursor-pointer'}">
                                 <span class="whitespace-nowrap w-full text-center">${currentVal}</span>
-                                ${!isGhost ? `<svg class="w-3 h-3 text-gray-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>` : ''}
+                                ${!isGhost ? `<svg class="w-3.5 h-3.5 text-slate-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>` : ''}
                             </button>
                             
                             ${!isGhost ? `
-                            <div id="${dropdownId}" class="dropdown-menu hidden absolute z-50 left-0 top-full mt-1 w-36 bg-white border border-gray-200 rounded-xl shadow-xl p-2 fade-in">
+                            <div id="${dropdownId}" class="dropdown-menu hidden absolute z-50 left-0 top-full mt-1 w-36 bg-white border border-slate-300 rounded-xl shadow-xl p-2 fade-in">
                                 <input type="text" placeholder="Cari Zone..." onkeyup="filterOptions(this, '${dropdownId}')"
-                                       class="w-full text-xs p-1.5 mb-2 border border-gray-300 rounded-md focus:outline-none focus:border-spx-orange font-medium">
+                                       class="w-full text-xs p-1.5 mb-2 border border-slate-300 rounded-md focus:outline-none focus:border-spx-orange font-bold text-slate-900">
                                 <div class="max-h-40 overflow-y-auto space-y-0.5 custom-scroll">
                                     ${optionsHtml}
                                 </div>
@@ -1288,7 +1278,7 @@
                     
                     const optionsHtml = statusOptions.map(s => `
                         <div onclick="selectStatus('${type}', ${index}, '${s}')" 
-                             class="dropdown-item px-3 py-1.5 hover:bg-spx-orange hover:text-white cursor-pointer rounded transition font-semibold text-xs ${c.status === s ? 'bg-orange-50 text-spx-orange' : 'text-gray-800'}">
+                             class="dropdown-item px-3 py-1.5 hover:bg-spx-orange hover:text-white cursor-pointer rounded transition font-bold text-xs ${c.status === s ? 'bg-orange-100 text-spx-orange' : 'text-slate-800'}">
                             ${s}
                         </div>
                     `).join('');
@@ -1296,15 +1286,15 @@
                     return `
                         <div class="relative custom-dropdown-container w-full">
                             <button type="button" ${isGhost ? 'disabled' : ''} onclick="toggleDropdown('${dropdownId}', event)" 
-                                    class="text-xs rounded-full px-3 py-1 text-center shadow-sm transition w-full flex items-center justify-between gap-1 ${statusColor} ${isGhost ? 'cursor-default opacity-85' : 'cursor-pointer'}">
+                                    class="text-xs rounded-full px-3 py-1.5 text-center shadow-sm transition w-full flex items-center justify-between gap-1 ${statusColor} ${isGhost ? 'cursor-default opacity-90' : 'cursor-pointer'}">
                                 <span class="whitespace-nowrap w-full text-center">${c.status}</span>
-                                ${!isGhost ? `<svg class="w-3 h-3 opacity-90 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>` : ''}
+                                ${!isGhost ? `<svg class="w-3.5 h-3.5 opacity-90 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>` : ''}
                             </button>
                             
                             ${!isGhost ? `
-                            <div id="${dropdownId}" class="dropdown-menu hidden absolute z-50 right-0 top-full mt-1 w-32 bg-white border border-gray-200 rounded-xl shadow-xl p-2 fade-in">
+                            <div id="${dropdownId}" class="dropdown-menu hidden absolute z-50 right-0 top-full mt-1 w-32 bg-white border border-slate-300 rounded-xl shadow-xl p-2 fade-in">
                                 <input type="text" placeholder="Cari..." onkeyup="filterOptions(this, '${dropdownId}')"
-                                       class="w-full text-xs p-1.5 mb-2 border border-gray-300 rounded-md focus:outline-none focus:border-spx-orange text-gray-800 font-medium">
+                                       class="w-full text-xs p-1.5 mb-2 border border-slate-300 rounded-md focus:outline-none focus:border-spx-orange text-slate-900 font-bold">
                                 <div class="max-h-36 overflow-y-auto space-y-0.5 custom-scroll">
                                     ${optionsHtml}
                                 </div>
@@ -1319,10 +1309,10 @@
                 const statusHtml = buildSearchableStatusDropdown();
 
                 const row = document.createElement('tr');
-                row.className = 'hover:bg-orange-50/40 transition border-b border-gray-100';
+                row.className = 'hover:bg-orange-50/60 transition border-b border-slate-200 text-slate-900 font-bold';
                 row.innerHTML = `
-                    <td class="p-3 font-semibold text-gray-900 text-xs whitespace-nowrap">
-                        ${c.id ? `<span class="text-spx-navy font-bold text-xs mr-1 bg-slate-100 px-1.5 py-0.5 rounded border border-slate-200">[${c.id}]</span>` : ''} ${c.name}
+                    <td class="p-3 font-black text-slate-900 text-xs whitespace-nowrap">
+                        ${c.id ? `[${c.id}]` : ''} ${c.name}
                     </td>
                     <td class="p-2">
                         <div class="grid grid-cols-2 gap-1.5">
@@ -1387,44 +1377,34 @@
         }
 
         function switchView(viewName) {
-            const viewProjection = document.getElementById('view-projection');
-            const viewSchedule = document.getElementById('view-schedule');
+            const viewProjSched = document.getElementById('view-projection-schedule');
             const viewMaster = document.getElementById('view-master');
             
-            const navProj = document.getElementById('nav-projection');
-            const navSched = document.getElementById('nav-schedule');
+            const navProjSched = document.getElementById('nav-projection-schedule');
             const navMast = document.getElementById('nav-master');
 
-            const tabProj = document.getElementById('tab-projection');
-            const tabSched = document.getElementById('tab-schedule');
+            const tabProjSched = document.getElementById('tab-projection-schedule');
             const tabMast = document.getElementById('tab-master');
 
-            viewProjection.classList.add('hidden');
-            viewSchedule.classList.add('hidden');
+            viewProjSched.classList.add('hidden');
             viewMaster.classList.add('hidden');
 
-            const navDefaultClass = "w-full flex items-center gap-3 px-3 py-3 rounded-lg text-gray-300 hover:bg-spx-navy-light transition font-medium";
-            const navActiveClass = "w-full flex items-center gap-3 px-3 py-3 rounded-lg bg-spx-navy-light text-white font-semibold transition";
+            const navDefaultClass = "w-full flex items-center gap-3 px-3 py-3 rounded-lg text-slate-300 hover:bg-spx-navy-light transition font-bold";
+            const navActiveClass = "w-full flex items-center gap-3 px-3 py-3 rounded-lg bg-spx-navy-light text-white font-black transition";
 
-            navProj.className = navDefaultClass;
-            navSched.className = navDefaultClass;
+            navProjSched.className = navDefaultClass;
             navMast.className = navDefaultClass;
 
-            const tabDefaultClass = "bg-spx-navy text-white font-bold px-6 py-2.5 rounded-lg text-sm flex items-center gap-2 hover:bg-spx-navy-light transition";
-            const tabActiveClass = "bg-spx-orange text-white font-bold px-6 py-2.5 rounded-lg text-sm flex items-center gap-2 shadow-sm transition";
+            const tabDefaultClass = "bg-spx-navy text-white font-black px-6 py-2.5 rounded-lg text-sm flex items-center gap-2 hover:bg-spx-navy-light transition";
+            const tabActiveClass = "bg-spx-orange text-white font-black px-6 py-2.5 rounded-lg text-sm flex items-center gap-2 shadow transition";
 
-            tabProj.className = tabDefaultClass;
-            tabSched.className = tabDefaultClass;
+            tabProjSched.className = tabDefaultClass;
             tabMast.className = tabDefaultClass;
 
-            if (viewName === 'projection') {
-                viewProjection.classList.remove('hidden');
-                navProj.className = navActiveClass;
-                tabProj.className = tabActiveClass;
-            } else if (viewName === 'schedule') {
-                viewSchedule.classList.remove('hidden');
-                navSched.className = navActiveClass;
-                tabSched.className = tabActiveClass;
+            if (viewName === 'projection-schedule') {
+                viewProjSched.classList.remove('hidden');
+                navProjSched.className = navActiveClass;
+                tabProjSched.className = tabActiveClass;
             } else if (viewName === 'master') {
                 viewMaster.classList.remove('hidden');
                 navMast.className = navActiveClass;
@@ -1514,20 +1494,20 @@
             document.getElementById('masterBadgeCount').innerText = `${rawCsvRows.length} Data`;
 
             if (rawCsvFields.length === 0) {
-                trHead.innerHTML = `<th class="p-3 text-center border-b border-spx-navy w-12">#</th><th class="p-3 italic text-gray-300">Belum ada data CSV yang di-impor. Silakan klik tombol "Impor File CSV" di menu sebelah kiri.</th>`;
-                tbody.innerHTML = `<tr><td colspan="2" class="py-12 text-center text-gray-400">
+                trHead.innerHTML = `<th class="p-3 text-center border-b border-spx-navy w-12 text-xs">#</th><th class="p-3 italic text-slate-300 text-xs">Belum ada data CSV yang di-impor. Silakan klik tombol "Impor File CSV" di menu sebelah kiri.</th>`;
+                tbody.innerHTML = `<tr><td colspan="2" class="py-12 text-center text-slate-500">
                     <div class="flex flex-col items-center justify-center gap-2">
-                        <svg class="w-12 h-12 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-                        <p class="font-semibold text-gray-500">Tabel Master Data Masih Kosong</p>
-                        <p class="text-xs text-gray-400">Silakan impor file CSV melalui tombol di sidebar untuk melihat isi data mentah secara otomatis.</p>
+                        <svg class="w-12 h-12 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                        <p class="font-bold text-slate-700 text-sm">Tabel Master Data Masih Kosong</p>
+                        <p class="text-xs text-slate-500 font-semibold">Silakan impor file CSV melalui tombol di sidebar untuk melihat isi data mentah secara otomatis.</p>
                     </div>
                 </td></tr>`;
                 return;
             }
 
-            let headHtml = `<th class="p-3 text-center border-b border-spx-navy bg-spx-navy w-12 text-spx-orange">#</th>`;
+            let headHtml = `<th class="p-3 text-center border-b border-spx-navy bg-spx-navy w-12 text-spx-orange text-xs">#</th>`;
             rawCsvFields.forEach(field => {
-                headHtml += `<th class="p-3 border-b border-spx-navy bg-spx-navy text-left whitespace-nowrap">${field}</th>`;
+                headHtml += `<th class="p-3 border-b border-spx-navy bg-spx-navy text-left whitespace-nowrap text-xs">${field}</th>`;
             });
             trHead.innerHTML = headHtml;
 
@@ -1538,18 +1518,18 @@
             const tbody = document.getElementById('masterTableBody');
             
             if (rowsToRender.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="${rawCsvFields.length + 1}" class="py-8 text-center text-gray-400 italic">Tidak ada data yang cocok dengan pencarian.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="${rawCsvFields.length + 1}" class="py-8 text-center text-slate-500 font-bold italic text-xs">Tidak ada data yang cocok dengan pencarian.</td></tr>`;
                 return;
             }
 
             let bodyHtml = '';
             rowsToRender.forEach((row, idx) => {
-                bodyHtml += `<tr class="hover:bg-orange-50/50 transition border-b border-gray-100">`;
-                bodyHtml += `<td class="p-2.5 text-center font-bold text-gray-400 bg-gray-50/50 text-[11px]">${idx + 1}</td>`;
+                bodyHtml += `<tr class="hover:bg-orange-50/60 transition border-b border-slate-200">`;
+                bodyHtml += `<td class="p-2.5 text-center font-black text-slate-500 bg-slate-100 text-xs">${idx + 1}</td>`;
                 
                 rawCsvFields.forEach(field => {
                     const val = row[field] !== undefined && row[field] !== null ? row[field] : '-';
-                    bodyHtml += `<td class="p-2.5 whitespace-nowrap text-gray-700">${val}</td>`;
+                    bodyHtml += `<td class="p-2.5 whitespace-nowrap text-slate-900 font-bold text-xs">${val}</td>`;
                 });
                 
                 bodyHtml += `</tr>`;
@@ -1644,12 +1624,12 @@
                 const val = dataMapA[z];
                 sumA.stdNon += val.stdNon; sumA.ecoNon += val.ecoNon;
                 sumA.stdBulky += val.stdBulky; sumA.ecoBulky += val.ecoBulky;
-                htmlA += `<tr class="hover:bg-orange-50/50 transition">
-                    <td class="p-1.5 font-bold border-r text-left pl-3">${z}</td>
-                    <td class="p-1.5">${val.stdNon}</td>
-                    <td class="p-1.5 border-r">${val.ecoNon}</td>
-                    <td class="p-1.5">${val.stdBulky}</td>
-                    <td class="p-1.5">${val.ecoBulky}</td>
+                htmlA += `<tr class="hover:bg-orange-50/60 transition border-b border-slate-200 text-slate-900 font-bold">
+                    <td class="p-2 font-black border-r border-slate-300 text-left pl-3 bg-slate-50 text-slate-900 text-xs">${z}</td>
+                    <td class="p-2 border-r border-slate-200 text-sm">${val.stdNon}</td>
+                    <td class="p-2 border-r border-slate-300 text-sm">${val.ecoNon}</td>
+                    <td class="p-2 border-r border-slate-200 text-sm">${val.stdBulky}</td>
+                    <td class="p-2 text-sm">${val.ecoBulky}</td>
                 </tr>`;
             });
             document.getElementById('tableZoneA').innerHTML = htmlA;
@@ -1663,12 +1643,12 @@
                 const val = dataMapBC[z];
                 sumBC.stdNon += val.stdNon; sumBC.ecoNon += val.ecoNon;
                 sumBC.stdBulky += val.stdBulky; sumBC.ecoBulky += val.ecoBulky;
-                htmlBC += `<tr class="hover:bg-orange-50/50 transition">
-                    <td class="p-1.5 font-bold border-r text-left pl-3">${z}</td>
-                    <td class="p-1.5">${val.stdNon}</td>
-                    <td class="p-1.5 border-r">${val.ecoNon}</td>
-                    <td class="p-1.5">${val.stdBulky}</td>
-                    <td class="p-1.5">${val.ecoBulky}</td>
+                htmlBC += `<tr class="hover:bg-orange-50/60 transition border-b border-slate-200 text-slate-900 font-bold">
+                    <td class="p-2 font-black border-r border-slate-300 text-left pl-3 bg-slate-50 text-slate-900 text-xs">${z}</td>
+                    <td class="p-2 border-r border-slate-200 text-sm">${val.stdNon}</td>
+                    <td class="p-2 border-r border-slate-300 text-sm">${val.ecoNon}</td>
+                    <td class="p-2 border-r border-slate-200 text-sm">${val.stdBulky}</td>
+                    <td class="p-2 text-sm">${val.ecoBulky}</td>
                 </tr>`;
             });
             document.getElementById('tableZoneBC').innerHTML = htmlBC;
@@ -1680,18 +1660,18 @@
             let htmlOther = '', sumOther = { stdNon: 0, ecoNon: 0, stdBulky: 0, ecoBulky: 0 };
             const otherKeys = Object.keys(dataMapOther);
             if (otherKeys.length === 0) {
-                htmlOther = `<tr><td colspan="5" class="py-4 text-gray-400 italic text-center">Tidak ada Zone lain yang terdeteksi.</td></tr>`;
+                htmlOther = `<tr><td colspan="5" class="py-4 text-slate-500 font-bold italic text-center text-xs">Tidak ada Zone lain yang terdeteksi.</td></tr>`;
             } else {
                 otherKeys.forEach(z => {
                     const val = dataMapOther[z];
                     sumOther.stdNon += val.stdNon; sumOther.ecoNon += val.ecoNon;
                     sumOther.stdBulky += val.stdBulky; sumOther.ecoBulky += val.ecoBulky;
-                    htmlOther += `<tr class="hover:bg-orange-50/50 transition">
-                        <td class="p-1.5 font-bold border-r text-left pl-3 text-spx-orange">${z}</td>
-                        <td class="p-1.5">${val.stdNon}</td>
-                        <td class="p-1.5 border-r">${val.ecoNon}</td>
-                        <td class="p-1.5">${val.stdBulky}</td>
-                        <td class="p-1.5">${val.ecoBulky}</td>
+                    htmlOther += `<tr class="hover:bg-orange-50/60 transition border-b border-slate-200 text-slate-900 font-bold">
+                        <td class="p-2 font-black border-r border-slate-300 text-left pl-3 bg-slate-50 text-slate-900 text-xs">${z}</td>
+                        <td class="p-2 border-r border-slate-200 text-sm">${val.stdNon}</td>
+                        <td class="p-2 border-r border-slate-300 text-sm">${val.ecoNon}</td>
+                        <td class="p-2 border-r border-slate-200 text-sm">${val.stdBulky}</td>
+                        <td class="p-2 text-sm">${val.ecoBulky}</td>
                     </tr>`;
                 });
             }
@@ -1701,23 +1681,32 @@
             document.getElementById('sumOther_StdBulky').innerText = sumOther.stdBulky;
             document.getElementById('sumOther_EcoBulky').innerText = sumOther.ecoBulky;
 
-            const grandNonBulky = sumA.stdNon + sumA.ecoNon + sumBC.stdNon + sumBC.ecoNon + sumOther.stdNon + sumOther.ecoNon;
-            const grandBulky = sumA.stdBulky + sumA.ecoBulky + sumBC.stdBulky + sumBC.ecoBulky + sumOther.stdBulky + sumOther.ecoBulky;
-            const grandTotal = grandNonBulky + grandBulky;
+            const grandStdNon = sumA.stdNon + sumBC.stdNon + sumOther.stdNon;
+            const grandEcoNon = sumA.ecoNon + sumBC.ecoNon + sumOther.ecoNon;
+            const grandTotalNonBulky = grandStdNon + grandEcoNon;
 
-            document.getElementById('statNonBulky').innerText = grandNonBulky.toLocaleString('id-ID');
-            document.getElementById('statBulky').innerText = grandBulky.toLocaleString('id-ID');
-            document.getElementById('statProjection').innerText = grandTotal.toLocaleString('id-ID');
+            const grandStdBulky = sumA.stdBulky + sumBC.stdBulky + sumOther.stdBulky;
+            const grandEcoBulky = sumA.ecoBulky + sumBC.ecoBulky + sumOther.ecoBulky;
+            const grandTotalBulky = grandStdBulky + grandEcoBulky;
+
+            const grandTotalProjection = grandTotalNonBulky + grandTotalBulky;
+
+            document.getElementById('statNonBulky').innerText = grandTotalNonBulky.toLocaleString('id-ID');
+            document.getElementById('statBulky').innerText = grandTotalBulky.toLocaleString('id-ID');
+            document.getElementById('statProjection').innerText = grandTotalProjection.toLocaleString('id-ID');
             document.getElementById('statHV').innerText = countHVGlobal.toLocaleString('id-ID');
         }
 
-        // INITIALIZATION
-        window.addEventListener('DOMContentLoaded', () => {
+        window.onload = function() {
             updateWitaHeaderDate();
             renderOffDayTable();
             loadSavedCsvData();
             renderCourierLists();
-        });
+
+            if (window.initFirebaseRealtime) {
+                window.initFirebaseRealtime();
+            }
+        };
     </script>
 </body>
 </html>
